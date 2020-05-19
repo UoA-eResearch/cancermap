@@ -61,8 +61,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Whanganui,Bladder - C67,Male,9
 2017,Whanganui,Bladder - C67,Female,1
 2017,Whanganui,Anus - C21,Female,1
-2017,Whanganui,"All Cancers - C00-C96, D45-D47",Male,239
-2017,Whanganui,"All Cancers - C00-C96, D45-D47",Female,194
 2017,West Coast,Uterus - C54-C55,Female,2
 2017,West Coast,Unspecified site - C80,Female,1
 2017,West Coast,Unknown primary - C77-C79,Male,1
@@ -110,8 +108,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,West Coast,Bladder - C67,Male,5
 2017,West Coast,Bladder - C67,Female,2
 2017,West Coast,Anus - C21,Male,1
-2017,West Coast,"All Cancers - C00-C96, D45-D47",Male,104
-2017,West Coast,"All Cancers - C00-C96, D45-D47",Female,80
 2017,Waitemata,Vulva - C51,Female,6
 2017,Waitemata,Vagina - C52,Female,2
 2017,Waitemata,Uterus - C54-C55,Female,72
@@ -213,8 +209,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Waitemata,Bladder - C67,Female,13
 2017,Waitemata,Anus - C21,Male,3
 2017,Waitemata,Anus - C21,Female,3
-2017,Waitemata,"All Cancers - C00-C96, D45-D47",Male,1441
-2017,Waitemata,"All Cancers - C00-C96, D45-D47",Female,1316
 2017,Waitemata,Adrenal gland - C74,Female,2
 2017,Waitemata,Accessory sinuses - C31,Female,2
 2017,Wairarapa,Uterus - C54-C55,Female,9
@@ -273,8 +267,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Wairarapa,Bladder - C67,Male,2
 2017,Wairarapa,Bladder - C67,Female,2
 2017,Wairarapa,Anus - C21,Female,1
-2017,Wairarapa,"All Cancers - C00-C96, D45-D47",Male,194
-2017,Wairarapa,"All Cancers - C00-C96, D45-D47",Female,138
 2017,Waikato,Vulva - C51,Female,3
 2017,Waikato,Uterus - C54-C55,Female,58
 2017,Waikato,Ureter - C66,Male,1
@@ -376,8 +368,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Waikato,Bladder - C67,Female,11
 2017,Waikato,Anus - C21,Male,2
 2017,Waikato,Anus - C21,Female,1
-2017,Waikato,"All Cancers - C00-C96, D45-D47",Male,1195
-2017,Waikato,"All Cancers - C00-C96, D45-D47",Female,1045
 2017,Waikato,Accessory sinuses - C31,Female,1
 2017,Taranaki,Vulva - C51,Female,3
 2017,Taranaki,Uterus - C54-C55,Female,13
@@ -458,8 +448,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Taranaki,Bladder - C67,Female,3
 2017,Taranaki,Anus - C21,Male,1
 2017,Taranaki,Anus - C21,Female,2
-2017,Taranaki,"All Cancers - C00-C96, D45-D47",Male,349
-2017,Taranaki,"All Cancers - C00-C96, D45-D47",Female,327
 2017,Taranaki,Accessory sinuses - C31,Male,2
 2017,Tairawhiti,Vulva - C51,Female,1
 2017,Tairawhiti,Vagina - C52,Female,1
@@ -514,8 +502,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Tairawhiti,Brain - C71,Female,1
 2017,Tairawhiti,Bone and articular cartilage - C40-C41,Female,1
 2017,Tairawhiti,Anus - C21,Female,2
-2017,Tairawhiti,"All Cancers - C00-C96, D45-D47",Male,130
-2017,Tairawhiti,"All Cancers - C00-C96, D45-D47",Female,130
 2017,Tairawhiti,Accessory sinuses - C31,Male,1
 2017,Southern,Vulva - C51,Female,6
 2017,Southern,Vagina - C52,Female,3
@@ -611,8 +597,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Southern,Bladder - C67,Female,7
 2017,Southern,Anus - C21,Male,2
 2017,Southern,Anus - C21,Female,2
-2017,Southern,"All Cancers - C00-C96, D45-D47",Male,958
-2017,Southern,"All Cancers - C00-C96, D45-D47",Female,822
 2017,Southern,Adrenal gland - C74,Male,1
 2017,Southern,Adrenal gland - C74,Female,1
 2017,Southern,Accessory sinuses - C31,Male,1
@@ -672,8 +656,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,South Canterbury,Bladder - C67,Male,10
 2017,South Canterbury,Bladder - C67,Female,1
 2017,South Canterbury,Anus - C21,Female,1
-2017,South Canterbury,"All Cancers - C00-C96, D45-D47",Male,196
-2017,South Canterbury,"All Cancers - C00-C96, D45-D47",Female,167
 2017,Northland,Vulva - C51,Female,3
 2017,Northland,Vagina - C52,Female,3
 2017,Northland,Uterus - C54-C55,Female,29
@@ -758,8 +740,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Northland,Bladder - C67,Female,10
 2017,Northland,Anus - C21,Male,1
 2017,Northland,Anus - C21,Female,2
-2017,Northland,"All Cancers - C00-C96, D45-D47",Male,614
-2017,Northland,"All Cancers - C00-C96, D45-D47",Female,567
 2017,Nelson Marlborough,Vulva - C51,Female,1
 2017,Nelson Marlborough,Uterus - C54-C55,Female,13
 2017,Nelson Marlborough,Unspecified site - C80,Male,1
@@ -840,8 +820,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Nelson Marlborough,Bladder - C67,Female,4
 2017,Nelson Marlborough,Anus - C21,Male,1
 2017,Nelson Marlborough,Anus - C21,Female,1
-2017,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Male,566
-2017,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Female,401
 2017,Nelson Marlborough,Adrenal gland - C74,Female,1
 2017,MidCentral,Vulva - C51,Female,7
 2017,MidCentral,Uterus - C54-C55,Female,20
@@ -927,8 +905,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,MidCentral,Bladder - C67,Male,15
 2017,MidCentral,Bladder - C67,Female,6
 2017,MidCentral,Anus - C21,Female,1
-2017,MidCentral,"All Cancers - C00-C96, D45-D47",Male,570
-2017,MidCentral,"All Cancers - C00-C96, D45-D47",Female,510
 2017,Lakes,Vagina - C52,Female,2
 2017,Lakes,Uterus - C54-C55,Female,7
 2017,Lakes,Unspecified site - C80,Male,2
@@ -999,8 +975,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Lakes,Bladder - C67,Male,8
 2017,Lakes,Bladder - C67,Female,2
 2017,Lakes,Anus - C21,Female,1
-2017,Lakes,"All Cancers - C00-C96, D45-D47",Male,268
-2017,Lakes,"All Cancers - C00-C96, D45-D47",Female,253
 2017,Hutt Valley,Vulva - C51,Female,1
 2017,Hutt Valley,Uterus - C54-C55,Female,16
 2017,Hutt Valley,Ureter - C66,Female,1
@@ -1078,8 +1052,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Hutt Valley,Bladder - C67,Male,14
 2017,Hutt Valley,Bladder - C67,Female,4
 2017,Hutt Valley,Anus - C21,Female,1
-2017,Hutt Valley,"All Cancers - C00-C96, D45-D47",Male,417
-2017,Hutt Valley,"All Cancers - C00-C96, D45-D47",Female,304
 2017,Hawke's Bay,Vulva - C51,Female,1
 2017,Hawke's Bay,Vagina - C52,Female,1
 2017,Hawke's Bay,Uterus - C54-C55,Female,22
@@ -1165,8 +1137,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Hawke's Bay,Bladder - C67,Female,3
 2017,Hawke's Bay,Anus - C21,Male,1
 2017,Hawke's Bay,Anus - C21,Female,1
-2017,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Male,510
-2017,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Female,472
 2017,Hawke's Bay,Adrenal gland - C74,Male,1
 2017,Counties Manukau,Vulva - C51,Female,6
 2017,Counties Manukau,Vagina - C52,Female,2
@@ -1272,8 +1242,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Counties Manukau,Bladder - C67,Female,9
 2017,Counties Manukau,Anus - C21,Male,4
 2017,Counties Manukau,Anus - C21,Female,2
-2017,Counties Manukau,"All Cancers - C00-C96, D45-D47",Male,1101
-2017,Counties Manukau,"All Cancers - C00-C96, D45-D47",Female,1072
 2017,Counties Manukau,Accessory sinuses - C31,Male,1
 2017,Counties Manukau,Accessory sinuses - C31,Female,1
 2017,Capital & Coast,Vulva - C51,Female,3
@@ -1366,8 +1334,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Capital & Coast,Bladder - C67,Male,18
 2017,Capital & Coast,Bladder - C67,Female,6
 2017,Capital & Coast,Anus - C21,Female,5
-2017,Capital & Coast,"All Cancers - C00-C96, D45-D47",Male,748
-2017,Capital & Coast,"All Cancers - C00-C96, D45-D47",Female,666
 2017,Capital & Coast,Adrenal gland - C74,Female,3
 2017,Canterbury,Vulva - C51,Female,4
 2017,Canterbury,Vagina - C52,Female,1
@@ -1471,8 +1437,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Canterbury,Bladder - C67,Female,16
 2017,Canterbury,Anus - C21,Male,2
 2017,Canterbury,Anus - C21,Female,7
-2017,Canterbury,"All Cancers - C00-C96, D45-D47",Male,1558
-2017,Canterbury,"All Cancers - C00-C96, D45-D47",Female,1302
 2017,Canterbury,Adrenal gland - C74,Male,1
 2017,Canterbury,Adrenal gland - C74,Female,1
 2017,Canterbury,Accessory sinuses - C31,Male,1
@@ -1561,8 +1525,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Bay of Plenty,Bladder - C67,Male,17
 2017,Bay of Plenty,Bladder - C67,Female,8
 2017,Bay of Plenty,Anus - C21,Female,2
-2017,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Male,819
-2017,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Female,682
 2017,Auckland,Vulva - C51,Female,3
 2017,Auckland,Vagina - C52,Female,2
 2017,Auckland,Uterus - C54-C55,Female,57
@@ -1657,8 +1619,6 @@ Year,DHB,Subgroup,Sex,Cases
 2017,Auckland,Bladder - C67,Female,6
 2017,Auckland,Anus - C21,Male,3
 2017,Auckland,Anus - C21,Female,4
-2017,Auckland,"All Cancers - C00-C96, D45-D47",Male,995
-2017,Auckland,"All Cancers - C00-C96, D45-D47",Female,983
 2017,Auckland,Adrenal gland - C74,Male,1
 2017,Auckland,Adrenal gland - C74,Female,1
 2017,Auckland,Accessory sinuses - C31,Male,2
@@ -1724,8 +1684,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Whanganui,Brain - C71,Female,2
 2016,Whanganui,Bladder - C67,Male,5
 2016,Whanganui,Anus - C21,Male,1
-2016,Whanganui,"All Cancers - C00-C96, D45-D47",Male,235
-2016,Whanganui,"All Cancers - C00-C96, D45-D47",Female,184
 2016,Whanganui,Adrenal gland - C74,Female,1
 2016,West Coast,Uterus - C54-C55,Female,6
 2016,West Coast,Ureter - C66,Male,1
@@ -1771,8 +1729,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,West Coast,Breast - C50,Female,23
 2016,West Coast,Bladder - C67,Male,2
 2016,West Coast,Bladder - C67,Female,1
-2016,West Coast,"All Cancers - C00-C96, D45-D47",Male,108
-2016,West Coast,"All Cancers - C00-C96, D45-D47",Female,85
 2016,Waitemata,Vulva - C51,Female,3
 2016,Waitemata,Vagina - C52,Female,1
 2016,Waitemata,Uterus - C54-C55,Female,69
@@ -1881,8 +1837,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Waitemata,Bladder - C67,Female,11
 2016,Waitemata,Anus - C21,Male,1
 2016,Waitemata,Anus - C21,Female,3
-2016,Waitemata,"All Cancers - C00-C96, D45-D47",Male,1422
-2016,Waitemata,"All Cancers - C00-C96, D45-D47",Female,1312
 2016,Waitemata,Adrenal gland - C74,Male,1
 2016,Waitemata,Accessory sinuses - C31,Female,1
 2016,Wairarapa,Vulva - C51,Female,2
@@ -1937,8 +1891,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Wairarapa,Bladder - C67,Male,1
 2016,Wairarapa,Bladder - C67,Female,2
 2016,Wairarapa,Anus - C21,Male,1
-2016,Wairarapa,"All Cancers - C00-C96, D45-D47",Male,119
-2016,Wairarapa,"All Cancers - C00-C96, D45-D47",Female,147
 2016,Waikato,Vulva - C51,Female,7
 2016,Waikato,Vagina - C52,Female,3
 2016,Waikato,Uterus - C54-C55,Female,47
@@ -2032,8 +1984,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Waikato,Bladder - C67,Female,8
 2016,Waikato,Anus - C21,Male,2
 2016,Waikato,Anus - C21,Female,2
-2016,Waikato,"All Cancers - C00-C96, D45-D47",Male,1074
-2016,Waikato,"All Cancers - C00-C96, D45-D47",Female,1022
 2016,Taranaki,Vulva - C51,Female,3
 2016,Taranaki,Uterus - C54-C55,Female,19
 2016,Taranaki,Ureter - C66,Female,1
@@ -2103,8 +2053,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Taranaki,Bladder - C67,Male,10
 2016,Taranaki,Bladder - C67,Female,7
 2016,Taranaki,Anus - C21,Female,2
-2016,Taranaki,"All Cancers - C00-C96, D45-D47",Male,349
-2016,Taranaki,"All Cancers - C00-C96, D45-D47",Female,359
 2016,Taranaki,Accessory sinuses - C31,Male,1
 2016,Tairawhiti,Uterus - C54-C55,Female,8
 2016,Tairawhiti,Unspecified site - C80,Female,3
@@ -2158,8 +2106,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Tairawhiti,Bone and articular cartilage - C40-C41,Female,1
 2016,Tairawhiti,Bladder - C67,Male,3
 2016,Tairawhiti,Anus - C21,Female,3
-2016,Tairawhiti,"All Cancers - C00-C96, D45-D47",Male,139
-2016,Tairawhiti,"All Cancers - C00-C96, D45-D47",Female,139
 2016,Tairawhiti,Accessory sinuses - C31,Male,1
 2016,Southern,Vulva - C51,Female,3
 2016,Southern,Vagina - C52,Female,1
@@ -2257,8 +2203,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Southern,Bladder - C67,Female,9
 2016,Southern,Anus - C21,Male,3
 2016,Southern,Anus - C21,Female,2
-2016,Southern,"All Cancers - C00-C96, D45-D47",Male,934
-2016,Southern,"All Cancers - C00-C96, D45-D47",Female,866
 2016,Southern,Adrenal gland - C74,Female,1
 2016,South Canterbury,Uterus - C54-C55,Female,3
 2016,South Canterbury,Unspecified site - C80,Female,1
@@ -2317,8 +2261,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,South Canterbury,Bone and articular cartilage - C40-C41,Female,2
 2016,South Canterbury,Bladder - C67,Male,5
 2016,South Canterbury,Bladder - C67,Female,1
-2016,South Canterbury,"All Cancers - C00-C96, D45-D47",Male,208
-2016,South Canterbury,"All Cancers - C00-C96, D45-D47",Female,175
 2016,Northland,Vulva - C51,Female,1
 2016,Northland,Vagina - C52,Female,2
 2016,Northland,Uterus - C54-C55,Female,21
@@ -2405,8 +2347,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Northland,Bladder - C67,Female,3
 2016,Northland,Anus - C21,Male,3
 2016,Northland,Anus - C21,Female,2
-2016,Northland,"All Cancers - C00-C96, D45-D47",Male,611
-2016,Northland,"All Cancers - C00-C96, D45-D47",Female,532
 2016,Nelson Marlborough,Vulva - C51,Female,5
 2016,Nelson Marlborough,Uterus - C54-C55,Female,20
 2016,Nelson Marlborough,Ureter - C66,Female,3
@@ -2491,8 +2431,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Nelson Marlborough,Bladder - C67,Female,3
 2016,Nelson Marlborough,Anus - C21,Male,1
 2016,Nelson Marlborough,Anus - C21,Female,1
-2016,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Male,499
-2016,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Female,427
 2016,Nelson Marlborough,Adrenal gland - C74,Female,1
 2016,MidCentral,Vulva - C51,Female,1
 2016,MidCentral,Vagina - C52,Female,2
@@ -2572,8 +2510,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,MidCentral,Bladder - C67,Male,20
 2016,MidCentral,Bladder - C67,Female,5
 2016,MidCentral,Anus - C21,Male,2
-2016,MidCentral,"All Cancers - C00-C96, D45-D47",Male,531
-2016,MidCentral,"All Cancers - C00-C96, D45-D47",Female,484
 2016,MidCentral,Adrenal gland - C74,Female,2
 2016,Lakes,Vulva - C51,Female,2
 2016,Lakes,Uterus - C54-C55,Female,16
@@ -2651,8 +2587,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Lakes,Bladder - C67,Male,7
 2016,Lakes,Bladder - C67,Female,2
 2016,Lakes,Anus - C21,Female,1
-2016,Lakes,"All Cancers - C00-C96, D45-D47",Male,303
-2016,Lakes,"All Cancers - C00-C96, D45-D47",Female,294
 2016,Hutt Valley,Vulva - C51,Female,2
 2016,Hutt Valley,Uterus - C54-C55,Female,14
 2016,Hutt Valley,Ureter - C66,Male,1
@@ -2731,8 +2665,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Hutt Valley,Bladder - C67,Male,8
 2016,Hutt Valley,Bladder - C67,Female,5
 2016,Hutt Valley,Anus - C21,Female,1
-2016,Hutt Valley,"All Cancers - C00-C96, D45-D47",Male,423
-2016,Hutt Valley,"All Cancers - C00-C96, D45-D47",Female,357
 2016,Hutt Valley,Adrenal gland - C74,Female,1
 2016,Hawke's Bay,Vulva - C51,Female,2
 2016,Hawke's Bay,Uterus - C54-C55,Female,22
@@ -2820,8 +2752,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Hawke's Bay,Bladder - C67,Male,20
 2016,Hawke's Bay,Bladder - C67,Female,4
 2016,Hawke's Bay,Anus - C21,Female,2
-2016,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Male,539
-2016,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Female,440
 2016,Hawke's Bay,Adrenal gland - C74,Male,1
 2016,Hawke's Bay,Accessory sinuses - C31,Male,1
 2016,Counties Manukau,Vulva - C51,Female,3
@@ -2926,8 +2856,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Counties Manukau,Bladder - C67,Female,9
 2016,Counties Manukau,Anus - C21,Male,5
 2016,Counties Manukau,Anus - C21,Female,2
-2016,Counties Manukau,"All Cancers - C00-C96, D45-D47",Male,1107
-2016,Counties Manukau,"All Cancers - C00-C96, D45-D47",Female,1233
 2016,Counties Manukau,Adrenal gland - C74,Male,1
 2016,Counties Manukau,Adrenal gland - C74,Female,1
 2016,Counties Manukau,Accessory sinuses - C31,Male,1
@@ -3027,8 +2955,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Capital & Coast,Bladder - C67,Female,10
 2016,Capital & Coast,Anus - C21,Male,3
 2016,Capital & Coast,Anus - C21,Female,3
-2016,Capital & Coast,"All Cancers - C00-C96, D45-D47",Male,725
-2016,Capital & Coast,"All Cancers - C00-C96, D45-D47",Female,673
 2016,Capital & Coast,Adrenal gland - C74,Female,1
 2016,Canterbury,Vulva - C51,Female,9
 2016,Canterbury,Uterus - C54-C55,Female,64
@@ -3132,8 +3058,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Canterbury,Bladder - C67,Female,9
 2016,Canterbury,Anus - C21,Male,4
 2016,Canterbury,Anus - C21,Female,5
-2016,Canterbury,"All Cancers - C00-C96, D45-D47",Male,1515
-2016,Canterbury,"All Cancers - C00-C96, D45-D47",Female,1241
 2016,Canterbury,Adrenal gland - C74,Male,1
 2016,Canterbury,Accessory sinuses - C31,Male,1
 2016,Canterbury,Accessory sinuses - C31,Female,1
@@ -3223,8 +3147,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Bay of Plenty,Bladder - C67,Male,21
 2016,Bay of Plenty,Bladder - C67,Female,6
 2016,Bay of Plenty,Anus - C21,Female,1
-2016,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Male,683
-2016,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Female,602
 2016,Auckland,Vulva - C51,Female,5
 2016,Auckland,Uterus - C54-C55,Female,53
 2016,Auckland,Ureter - C66,Male,2
@@ -3329,8 +3251,6 @@ Year,DHB,Subgroup,Sex,Cases
 2016,Auckland,Bladder - C67,Male,26
 2016,Auckland,Bladder - C67,Female,10
 2016,Auckland,Anus - C21,Female,6
-2016,Auckland,"All Cancers - C00-C96, D45-D47",Male,942
-2016,Auckland,"All Cancers - C00-C96, D45-D47",Female,997
 2016,Auckland,Adrenal gland - C74,Male,1
 2016,Auckland,Adrenal gland - C74,Female,1
 2016,Auckland,Accessory sinuses - C31,Male,2
@@ -3390,8 +3310,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Whanganui,Brain - C71,Female,3
 2015,Whanganui,Bladder - C67,Male,6
 2015,Whanganui,Bladder - C67,Female,2
-2015,Whanganui,"All Cancers - C00-C96, D45-D47",Male,211
-2015,Whanganui,"All Cancers - C00-C96, D45-D47",Female,217
 2015,West Coast,Uterus - C54-C55,Female,7
 2015,West Coast,Unspecified site - C80,Male,1
 2015,West Coast,Unknown primary - C77-C79,Male,2
@@ -3431,8 +3349,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,West Coast,Breast - C50,Female,14
 2015,West Coast,Brain - C71,Male,1
 2015,West Coast,Bladder - C67,Male,4
-2015,West Coast,"All Cancers - C00-C96, D45-D47",Male,108
-2015,West Coast,"All Cancers - C00-C96, D45-D47",Female,74
 2015,Waitemata,Vulva - C51,Female,1
 2015,Waitemata,Uterus - C54-C55,Female,59
 2015,Waitemata,Ureter - C66,Female,1
@@ -3532,8 +3448,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Waitemata,Bladder - C67,Female,14
 2015,Waitemata,Anus - C21,Male,4
 2015,Waitemata,Anus - C21,Female,4
-2015,Waitemata,"All Cancers - C00-C96, D45-D47",Male,1345
-2015,Waitemata,"All Cancers - C00-C96, D45-D47",Female,1267
 2015,Wairarapa,Vulva - C51,Female,1
 2015,Wairarapa,Uterus - C54-C55,Female,5
 2015,Wairarapa,Ureter - C66,Female,1
@@ -3591,8 +3505,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Wairarapa,Bone and articular cartilage - C40-C41,Male,1
 2015,Wairarapa,Bladder - C67,Male,4
 2015,Wairarapa,Bladder - C67,Female,2
-2015,Wairarapa,"All Cancers - C00-C96, D45-D47",Male,147
-2015,Wairarapa,"All Cancers - C00-C96, D45-D47",Female,130
 2015,Waikato,Vulva - C51,Female,10
 2015,Waikato,Vagina - C52,Female,1
 2015,Waikato,Uterus - C54-C55,Female,60
@@ -3692,8 +3604,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Waikato,Bladder - C67,Female,19
 2015,Waikato,Anus - C21,Male,2
 2015,Waikato,Anus - C21,Female,4
-2015,Waikato,"All Cancers - C00-C96, D45-D47",Male,1052
-2015,Waikato,"All Cancers - C00-C96, D45-D47",Female,986
 2015,Waikato,Adrenal gland - C74,Male,1
 2015,Waikato,Adrenal gland - C74,Female,1
 2015,Waikato,Accessory sinuses - C31,Male,1
@@ -3769,8 +3679,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Taranaki,Bladder - C67,Male,9
 2015,Taranaki,Bladder - C67,Female,4
 2015,Taranaki,Anus - C21,Female,1
-2015,Taranaki,"All Cancers - C00-C96, D45-D47",Male,354
-2015,Taranaki,"All Cancers - C00-C96, D45-D47",Female,324
 2015,Tairawhiti,Vulva - C51,Female,1
 2015,Tairawhiti,Uterus - C54-C55,Female,7
 2015,Tairawhiti,Unknown primary - C77-C79,Male,5
@@ -3826,8 +3734,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Tairawhiti,Bladder - C67,Male,2
 2015,Tairawhiti,Bladder - C67,Female,1
 2015,Tairawhiti,Anus - C21,Female,1
-2015,Tairawhiti,"All Cancers - C00-C96, D45-D47",Male,145
-2015,Tairawhiti,"All Cancers - C00-C96, D45-D47",Female,152
 2015,Southern,Vulva - C51,Female,7
 2015,Southern,Vagina - C52,Female,2
 2015,Southern,Uterus - C54-C55,Female,30
@@ -3919,8 +3825,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Southern,Bladder - C67,Male,20
 2015,Southern,Bladder - C67,Female,8
 2015,Southern,Anus - C21,Female,2
-2015,Southern,"All Cancers - C00-C96, D45-D47",Male,920
-2015,Southern,"All Cancers - C00-C96, D45-D47",Female,824
 2015,Southern,Adrenal gland - C74,Female,1
 2015,South Canterbury,Uterus - C54-C55,Female,7
 2015,South Canterbury,Ureter - C66,Male,1
@@ -3983,8 +3887,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,South Canterbury,Bone and articular cartilage - C40-C41,Male,1
 2015,South Canterbury,Bladder - C67,Male,7
 2015,South Canterbury,Anus - C21,Male,1
-2015,South Canterbury,"All Cancers - C00-C96, D45-D47",Male,183
-2015,South Canterbury,"All Cancers - C00-C96, D45-D47",Female,171
 2015,Northland,Vulva - C51,Female,1
 2015,Northland,Vagina - C52,Female,1
 2015,Northland,Uterus - C54-C55,Female,30
@@ -4067,8 +3969,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Northland,Bladder - C67,Female,2
 2015,Northland,Anus - C21,Male,2
 2015,Northland,Anus - C21,Female,5
-2015,Northland,"All Cancers - C00-C96, D45-D47",Male,565
-2015,Northland,"All Cancers - C00-C96, D45-D47",Female,477
 2015,Northland,Adrenal gland - C74,Male,1
 2015,Northland,Adrenal gland - C74,Female,3
 2015,Northland,Accessory sinuses - C31,Male,1
@@ -4157,8 +4057,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Nelson Marlborough,Bladder - C67,Female,3
 2015,Nelson Marlborough,Anus - C21,Male,2
 2015,Nelson Marlborough,Anus - C21,Female,2
-2015,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Male,468
-2015,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Female,426
 2015,Nelson Marlborough,Accessory sinuses - C31,Female,1
 2015,MidCentral,Vulva - C51,Female,2
 2015,MidCentral,Uterus - C54-C55,Female,15
@@ -4236,8 +4134,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,MidCentral,Bladder - C67,Female,5
 2015,MidCentral,Anus - C21,Male,2
 2015,MidCentral,Anus - C21,Female,1
-2015,MidCentral,"All Cancers - C00-C96, D45-D47",Male,457
-2015,MidCentral,"All Cancers - C00-C96, D45-D47",Female,474
 2015,MidCentral,Adrenal gland - C74,Male,1
 2015,MidCentral,Accessory sinuses - C31,Female,1
 2015,Lakes,Vulva - C51,Female,2
@@ -4311,8 +4207,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Lakes,Bladder - C67,Female,3
 2015,Lakes,Anus - C21,Male,1
 2015,Lakes,Anus - C21,Female,1
-2015,Lakes,"All Cancers - C00-C96, D45-D47",Male,252
-2015,Lakes,"All Cancers - C00-C96, D45-D47",Female,265
 2015,Hutt Valley,Vulva - C51,Female,1
 2015,Hutt Valley,Uterus - C54-C55,Female,15
 2015,Hutt Valley,Ureter - C66,Male,2
@@ -4389,8 +4283,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Hutt Valley,Bladder - C67,Male,7
 2015,Hutt Valley,Bladder - C67,Female,5
 2015,Hutt Valley,Anus - C21,Female,2
-2015,Hutt Valley,"All Cancers - C00-C96, D45-D47",Male,359
-2015,Hutt Valley,"All Cancers - C00-C96, D45-D47",Female,350
 2015,Hutt Valley,Adrenal gland - C74,Female,1
 2015,Hawke's Bay,Vulva - C51,Female,1
 2015,Hawke's Bay,Vagina - C52,Female,2
@@ -4466,8 +4358,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Hawke's Bay,Brain - C71,Female,7
 2015,Hawke's Bay,Bladder - C67,Male,10
 2015,Hawke's Bay,Bladder - C67,Female,8
-2015,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Male,466
-2015,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Female,443
 2015,Counties Manukau,Vulva - C51,Female,4
 2015,Counties Manukau,Uterus - C54-C55,Female,76
 2015,Counties Manukau,Ureter - C66,Male,1
@@ -4568,8 +4458,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Counties Manukau,Bladder - C67,Female,8
 2015,Counties Manukau,Anus - C21,Male,3
 2015,Counties Manukau,Anus - C21,Female,2
-2015,Counties Manukau,"All Cancers - C00-C96, D45-D47",Male,1029
-2015,Counties Manukau,"All Cancers - C00-C96, D45-D47",Female,1129
 2015,Counties Manukau,Adrenal gland - C74,Female,3
 2015,Capital & Coast,Vulva - C51,Female,3
 2015,Capital & Coast,Uterus - C54-C55,Female,31
@@ -4660,8 +4548,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Capital & Coast,Bladder - C67,Female,1
 2015,Capital & Coast,Anus - C21,Male,1
 2015,Capital & Coast,Anus - C21,Female,4
-2015,Capital & Coast,"All Cancers - C00-C96, D45-D47",Male,708
-2015,Capital & Coast,"All Cancers - C00-C96, D45-D47",Female,659
 2015,Capital & Coast,Adrenal gland - C74,Male,1
 2015,Canterbury,Vulva - C51,Female,6
 2015,Canterbury,Vagina - C52,Female,1
@@ -4765,8 +4651,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Canterbury,Bladder - C67,Female,13
 2015,Canterbury,Anus - C21,Male,3
 2015,Canterbury,Anus - C21,Female,4
-2015,Canterbury,"All Cancers - C00-C96, D45-D47",Male,1442
-2015,Canterbury,"All Cancers - C00-C96, D45-D47",Female,1223
 2015,Bay of Plenty,Vulva - C51,Female,5
 2015,Bay of Plenty,Uterus - C54-C55,Female,25
 2015,Bay of Plenty,Ureter - C66,Male,2
@@ -4856,8 +4740,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Bay of Plenty,Bladder - C67,Female,8
 2015,Bay of Plenty,Anus - C21,Male,1
 2015,Bay of Plenty,Anus - C21,Female,2
-2015,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Male,709
-2015,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Female,676
 2015,Bay of Plenty,Adrenal gland - C74,Male,1
 2015,Auckland,Vagina - C52,Female,2
 2015,Auckland,Uterus - C54-C55,Female,47
@@ -4961,8 +4843,6 @@ Year,DHB,Subgroup,Sex,Cases
 2015,Auckland,Bladder - C67,Female,7
 2015,Auckland,Anus - C21,Male,1
 2015,Auckland,Anus - C21,Female,3
-2015,Auckland,"All Cancers - C00-C96, D45-D47",Male,998
-2015,Auckland,"All Cancers - C00-C96, D45-D47",Female,917
 2015,Auckland,Adrenal gland - C74,Male,2
 2015,Auckland,Adrenal gland - C74,Female,1
 2014,Whanganui,Vulva - C51,Female,1
@@ -5025,8 +4905,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Whanganui,Bladder - C67,Female,4
 2014,Whanganui,Anus - C21,Male,1
 2014,Whanganui,Anus - C21,Female,1
-2014,Whanganui,"All Cancers - C00-C96, D45-D47",Male,194
-2014,Whanganui,"All Cancers - C00-C96, D45-D47",Female,212
 2014,West Coast,Vulva - C51,Female,1
 2014,West Coast,Uterus - C54-C55,Female,2
 2014,West Coast,Unspecified site - C80,Female,1
@@ -5075,8 +4953,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,West Coast,Breast - C50,Female,29
 2014,West Coast,Brain - C71,Female,1
 2014,West Coast,Bladder - C67,Male,4
-2014,West Coast,"All Cancers - C00-C96, D45-D47",Male,109
-2014,West Coast,"All Cancers - C00-C96, D45-D47",Female,108
 2014,Waitemata,Vulva - C51,Female,5
 2014,Waitemata,Vagina - C52,Female,2
 2014,Waitemata,Uterus - C54-C55,Female,46
@@ -5183,8 +5059,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Waitemata,Bladder - C67,Female,13
 2014,Waitemata,Anus - C21,Male,2
 2014,Waitemata,Anus - C21,Female,9
-2014,Waitemata,"All Cancers - C00-C96, D45-D47",Male,1352
-2014,Waitemata,"All Cancers - C00-C96, D45-D47",Female,1254
 2014,Waitemata,Adrenal gland - C74,Male,1
 2014,Waitemata,Adrenal gland - C74,Female,1
 2014,Waitemata,Accessory sinuses - C31,Female,1
@@ -5248,8 +5122,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Wairarapa,Bladder - C67,Female,2
 2014,Wairarapa,Anus - C21,Male,1
 2014,Wairarapa,Anus - C21,Female,2
-2014,Wairarapa,"All Cancers - C00-C96, D45-D47",Male,157
-2014,Wairarapa,"All Cancers - C00-C96, D45-D47",Female,146
 2014,Waikato,Vulva - C51,Female,6
 2014,Waikato,Vagina - C52,Female,2
 2014,Waikato,Uterus - C54-C55,Female,50
@@ -5347,8 +5219,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Waikato,Bladder - C67,Female,8
 2014,Waikato,Anus - C21,Male,2
 2014,Waikato,Anus - C21,Female,4
-2014,Waikato,"All Cancers - C00-C96, D45-D47",Male,1023
-2014,Waikato,"All Cancers - C00-C96, D45-D47",Female,953
 2014,Waikato,Adrenal gland - C74,Male,2
 2014,Taranaki,Vulva - C51,Female,1
 2014,Taranaki,Vagina - C52,Female,1
@@ -5426,8 +5296,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Taranaki,Bladder - C67,Female,1
 2014,Taranaki,Anus - C21,Male,1
 2014,Taranaki,Anus - C21,Female,2
-2014,Taranaki,"All Cancers - C00-C96, D45-D47",Male,321
-2014,Taranaki,"All Cancers - C00-C96, D45-D47",Female,316
 2014,Tairawhiti,Uterus - C54-C55,Female,3
 2014,Tairawhiti,Unspecified site - C80,Female,1
 2014,Tairawhiti,Unknown primary - C77-C79,Male,3
@@ -5474,8 +5342,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Tairawhiti,Bladder - C67,Male,2
 2014,Tairawhiti,Bladder - C67,Female,2
 2014,Tairawhiti,Anus - C21,Female,1
-2014,Tairawhiti,"All Cancers - C00-C96, D45-D47",Male,126
-2014,Tairawhiti,"All Cancers - C00-C96, D45-D47",Female,125
 2014,Southern,Vulva - C51,Female,6
 2014,Southern,Vagina - C52,Female,1
 2014,Southern,Uterus - C54-C55,Female,32
@@ -5569,8 +5435,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Southern,Bladder - C67,Female,9
 2014,Southern,Anus - C21,Male,2
 2014,Southern,Anus - C21,Female,5
-2014,Southern,"All Cancers - C00-C96, D45-D47",Male,902
-2014,Southern,"All Cancers - C00-C96, D45-D47",Female,824
 2014,Southern,Adrenal gland - C74,Male,1
 2014,Southern,Accessory sinuses - C31,Male,2
 2014,South Canterbury,Vulva - C51,Female,1
@@ -5630,8 +5494,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,South Canterbury,Bladder - C67,Male,9
 2014,South Canterbury,Bladder - C67,Female,1
 2014,South Canterbury,Anus - C21,Male,2
-2014,South Canterbury,"All Cancers - C00-C96, D45-D47",Male,203
-2014,South Canterbury,"All Cancers - C00-C96, D45-D47",Female,184
 2014,South Canterbury,Adrenal gland - C74,Male,1
 2014,Northland,Vulva - C51,Female,3
 2014,Northland,Uterus - C54-C55,Female,18
@@ -5711,8 +5573,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Northland,Bladder - C67,Female,6
 2014,Northland,Anus - C21,Male,2
 2014,Northland,Anus - C21,Female,2
-2014,Northland,"All Cancers - C00-C96, D45-D47",Male,558
-2014,Northland,"All Cancers - C00-C96, D45-D47",Female,470
 2014,Nelson Marlborough,Vulva - C51,Female,1
 2014,Nelson Marlborough,Vagina - C52,Female,1
 2014,Nelson Marlborough,Uterus - C54-C55,Female,23
@@ -5786,8 +5646,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Nelson Marlborough,Bladder - C67,Female,6
 2014,Nelson Marlborough,Anus - C21,Male,1
 2014,Nelson Marlborough,Anus - C21,Female,1
-2014,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Male,432
-2014,Nelson Marlborough,"All Cancers - C00-C96, D45-D47",Female,388
 2014,Nelson Marlborough,Accessory sinuses - C31,Male,1
 2014,MidCentral,Vulva - C51,Female,3
 2014,MidCentral,Uterus - C54-C55,Female,27
@@ -5870,8 +5728,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,MidCentral,Bladder - C67,Male,16
 2014,MidCentral,Bladder - C67,Female,7
 2014,MidCentral,Anus - C21,Female,4
-2014,MidCentral,"All Cancers - C00-C96, D45-D47",Male,527
-2014,MidCentral,"All Cancers - C00-C96, D45-D47",Female,480
 2014,Lakes,Vulva - C51,Female,1
 2014,Lakes,Vagina - C52,Female,1
 2014,Lakes,Uterus - C54-C55,Female,10
@@ -5945,8 +5801,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Lakes,Bladder - C67,Female,3
 2014,Lakes,Anus - C21,Male,2
 2014,Lakes,Anus - C21,Female,1
-2014,Lakes,"All Cancers - C00-C96, D45-D47",Male,274
-2014,Lakes,"All Cancers - C00-C96, D45-D47",Female,250
 2014,Lakes,Adrenal gland - C74,Male,1
 2014,Lakes,Accessory sinuses - C31,Male,2
 2014,Hutt Valley,Vulva - C51,Female,4
@@ -6023,8 +5877,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Hutt Valley,Bladder - C67,Female,4
 2014,Hutt Valley,Anus - C21,Male,2
 2014,Hutt Valley,Anus - C21,Female,3
-2014,Hutt Valley,"All Cancers - C00-C96, D45-D47",Male,388
-2014,Hutt Valley,"All Cancers - C00-C96, D45-D47",Female,396
 2014,Hawke's Bay,Vulva - C51,Female,4
 2014,Hawke's Bay,Vagina - C52,Female,2
 2014,Hawke's Bay,Uterus - C54-C55,Female,24
@@ -6107,8 +5959,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Hawke's Bay,Bladder - C67,Female,4
 2014,Hawke's Bay,Anus - C21,Male,3
 2014,Hawke's Bay,Anus - C21,Female,3
-2014,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Male,465
-2014,Hawke's Bay,"All Cancers - C00-C96, D45-D47",Female,478
 2014,Hawke's Bay,Accessory sinuses - C31,Male,1
 2014,Counties Manukau,Vulva - C51,Female,8
 2014,Counties Manukau,Vagina - C52,Female,1
@@ -6214,8 +6064,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Counties Manukau,Bladder - C67,Female,8
 2014,Counties Manukau,Anus - C21,Male,1
 2014,Counties Manukau,Anus - C21,Female,3
-2014,Counties Manukau,"All Cancers - C00-C96, D45-D47",Male,1033
-2014,Counties Manukau,"All Cancers - C00-C96, D45-D47",Female,1024
 2014,Capital & Coast,Vulva - C51,Female,3
 2014,Capital & Coast,Uterus - C54-C55,Female,36
 2014,Capital & Coast,Ureter - C66,Male,2
@@ -6309,8 +6157,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Capital & Coast,Bladder - C67,Female,8
 2014,Capital & Coast,Anus - C21,Male,2
 2014,Capital & Coast,Anus - C21,Female,4
-2014,Capital & Coast,"All Cancers - C00-C96, D45-D47",Male,702
-2014,Capital & Coast,"All Cancers - C00-C96, D45-D47",Female,690
 2014,Capital & Coast,Adrenal gland - C74,Male,1
 2014,Capital & Coast,Accessory sinuses - C31,Male,1
 2014,Canterbury,Vulva - C51,Female,12
@@ -6414,8 +6260,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Canterbury,Bladder - C67,Female,17
 2014,Canterbury,Anus - C21,Male,5
 2014,Canterbury,Anus - C21,Female,7
-2014,Canterbury,"All Cancers - C00-C96, D45-D47",Male,1480
-2014,Canterbury,"All Cancers - C00-C96, D45-D47",Female,1258
 2014,Canterbury,Adrenal gland - C74,Male,3
 2014,Canterbury,Adrenal gland - C74,Female,1
 2014,Canterbury,Accessory sinuses - C31,Male,1
@@ -6506,8 +6350,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Bay of Plenty,Bladder - C67,Male,22
 2014,Bay of Plenty,Bladder - C67,Female,7
 2014,Bay of Plenty,Anus - C21,Female,1
-2014,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Male,748
-2014,Bay of Plenty,"All Cancers - C00-C96, D45-D47",Female,638
 2014,Bay of Plenty,Adrenal gland - C74,Male,1
 2014,Auckland,Vulva - C51,Female,6
 2014,Auckland,Vagina - C52,Female,1
@@ -6608,8 +6450,6 @@ Year,DHB,Subgroup,Sex,Cases
 2014,Auckland,Bladder - C67,Female,6
 2014,Auckland,Anus - C21,Male,2
 2014,Auckland,Anus - C21,Female,1
-2014,Auckland,"All Cancers - C00-C96, D45-D47",Male,935
-2014,Auckland,"All Cancers - C00-C96, D45-D47",Female,848
 2014,Auckland,Adrenal gland - C74,Female,1
 2014,Auckland,Accessory sinuses - C31,Male,1
 2014,Auckland,Accessory sinuses - C31,Female,1

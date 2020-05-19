@@ -20,7 +20,7 @@ html, body, #map {
 .legend {
     line-height: 18px;
     color: white;
-    width: 207px;
+    width: 400px;
     padding: 20px;
     margin-top: 30px !important;
 }
@@ -75,6 +75,10 @@ table thead th {
 .leaflet-touch .leaflet-control-layers-toggle {
   width: 60px;
   height: 60px;
+}
+
+.leaflet-top {
+  z-index: 9999;
 }
 
 

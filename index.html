@@ -27,7 +27,7 @@
         CANCER_MAX_DOMAIN = 2500;
         AGE_MAX_DOMAIN = 500;
       }
-      var layers = ["Hospitals", "DHBs", "Active COVID-19 cases"];
+      var layers = ["Hospitals", "DHBs"];
       if (urlParams.get("layers")) {
         layers = urlParams.get("layers").split(",");
       }
@@ -387,109 +387,135 @@
                     Plotly.d3.csv("NZ_cancer.csv", function(cancer) {
                       console.log(cancer);
                       window.cancer = cancer;
-                        $.getJSON("NZ_DHB2012.geojson", function(NZ_DHB2012) {
-                          console.log(NZ_DHB2012);
-                          new L.GeoJSON(NZ_DHB2012, {
-                            onEachFeature: function (feature, layer) {
-                              var popup = '<div id="graph"></div>';
-                              var name = feature.properties.NAME;
-                              if (name == "Hutt") name = "Hutt Valley"
-                              if (name == "Midcentral") name = "MidCentral"
-                              feature.data.name = name;
-                              layer.bindTooltip(name + " DHB").bindPopup(popup, {data: feature.data, minWidth: 800, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
-                              var count = 0;
-                              for (var i in covidCasesByDHB) {
-                                var c = covidCasesByDHB[i];
-                                if (c.DHB == name) {
-                                  count = parseInt(c.Active);
-                                  console.log(name, count)
-                                }
-                              }
-                              L.marker(layer.getBounds().getCenter(), {name: name, cases: count}).bindTooltip(count + " active COVID-19 cases in " + name).addTo(covidLayer);
-                            },
-                            style: function(feature) {
-                              var name = feature.properties.NAME;
-                              var count = 0;
-                              var total = 0;
-                              var ageSummaryM = {}
-                              var ageSummaryF = {}
-                              var smokerAgeSummaryM = {}
-                              var smokerAgeSummaryF = {}
-                              var smokerTotal = 0;
-                              for (var i in sa2_centroids_to_DHB.features) {
-                                var f = sa2_centroids_to_DHB.features[i];
-                                if (f.properties["DHB.NAME"] == name) {
-                                  var id = f.properties.SA22018_V1;
-                                  var sa2data = data[id].Total;
-                                  if (sa2data.over65 != undefined) {
-                                    count += sa2data.over65;
-                                  }
-                                  for (var k in data[id].Male) {
-                                    if (!ageSummaryM[k]) ageSummaryM[k] = 0;
-                                    ageSummaryM[k] += data[id].Male[k];
-                                  }
-                                  for (var k in data[id].Female) {
-                                    if (!ageSummaryF[k]) ageSummaryF[k] = 0;
-                                    ageSummaryF[k] += data[id].Female[k];
-                                  }
-                                  total += sa2data.Total;
-                                  for (var k in smokers[id].Male["Regular smoker"]) {
-                                    if (!smokerAgeSummaryM[k]) smokerAgeSummaryM[k] = 0;
-                                    smokerAgeSummaryM[k] += smokers[id].Male["Regular smoker"][k]
-                                  }
-                                  for (var k in smokers[id].Female["Regular smoker"]) {
-                                    if (!smokerAgeSummaryF[k]) smokerAgeSummaryF[k] = 0;
-                                    smokerAgeSummaryF[k] += smokers[id].Female["Regular smoker"][k]
-                                  }
-                                  smokerTotal += smokers[id].Total;
-                                }
-                              }
-                              feature.data = {
-                                name: name + " DHB",
-                                type: "DHB",
-                                Female: ageSummaryF,
-                                Male: ageSummaryM,
-                                smokerData: {
-                                  Female: {
-                                    "Regular smoker": smokerAgeSummaryF
-                                  },
-                                  Male: {
-                                    "Regular smoker": smokerAgeSummaryM
-                                  },
-                                  Total: smokerTotal
-                                },
-                                Total: {
-                                  Total: total
-                                }
-                              }
-                              if (window.colour_DHB_by == "cancer") {
-                                count = 0;
-                                if (name == "Hutt") name = "Hutt Valley"
-                                if (name == "Midcentral") name = "MidCentral"
-                                if (name == "Capital and Coast") name = "Capital & Coast"
-                                for (var r of cancer) {
-                                  if (r.Year == "2017" && r.DHB == name && r.Subgroup == "All Cancers - C00-C96, D45-D47") {
-                                    count += parseInt(r.Cases);
-                                  }
-                                }
-                                console.log(name, count, total);
-                                if (colour_mode == "pct") {
-                                  count = count / total * 100;
-                                }
-                                var color = cancer_cmap(count);
-                              } else {
-                                var color = age_cmap(count);
-                              }
-
-                              return {
-                                color: "black",
-                                fillColor: color,
-                                fillOpacity: 1,
-                                weight: 1
+                      var years = [2012, 2013, 2014, 2015, 2016, 2017];
+                      var cancerPlotData = [{
+                        x: years,
+                        y: years.map(year => cancer.filter(r => r.Year == year && r.Cases && r.Sex == "Male").reduce((sum, r) => sum + parseInt(r.Cases), 0)),
+                        name: "Male",
+                        type: 'bar',
+                      }, {
+                        x: years,
+                        y: years.map(year => cancer.filter(r => r.Year == year && r.Cases && r.Sex == "Female").reduce((sum, r) => sum + parseInt(r.Cases), 0)),
+                        name: "Female",
+                        type: 'bar',
+                      }];
+                      var layout = {
+                        title: "Cancer incidence over time",
+                        barmode: 'stack',
+                        height: 300,
+                        width: 400,
+                        margin: {
+                          pad: 0,
+                          l: 40,
+                          r: 40,
+                          t: 70,
+                          b: 40
+                        }
+                      }
+                      Plotly.newPlot($("#cancerPlot")[0], cancerPlotData, layout);
+                      $.getJSON("NZ_DHB2012.geojson", function(NZ_DHB2012) {
+                        console.log(NZ_DHB2012);
+                        new L.GeoJSON(NZ_DHB2012, {
+                          onEachFeature: function (feature, layer) {
+                            var popup = '<div id="graph"></div>';
+                            var name = feature.properties.NAME;
+                            if (name == "Hutt") name = "Hutt Valley"
+                            if (name == "Midcentral") name = "MidCentral"
+                            feature.data.name = name;
+                            layer.bindTooltip(name + " DHB").bindPopup(popup, {data: feature.data, minWidth: 800, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
+                            var count = 0;
+                            for (var i in covidCasesByDHB) {
+                              var c = covidCasesByDHB[i];
+                              if (c.DHB == name) {
+                                count = parseInt(c.Active);
+                                console.log(name, count)
                               }
                             }
-                          }).addTo(DHBLayer);
-                        });
+                            L.marker(layer.getBounds().getCenter(), {name: name, cases: count}).bindTooltip(count + " active COVID-19 cases in " + name).addTo(covidLayer);
+                          },
+                          style: function(feature) {
+                            var name = feature.properties.NAME;
+                            var count = 0;
+                            var total = 0;
+                            var ageSummaryM = {}
+                            var ageSummaryF = {}
+                            var smokerAgeSummaryM = {}
+                            var smokerAgeSummaryF = {}
+                            var smokerTotal = 0;
+                            for (var i in sa2_centroids_to_DHB.features) {
+                              var f = sa2_centroids_to_DHB.features[i];
+                              if (f.properties["DHB.NAME"] == name) {
+                                var id = f.properties.SA22018_V1;
+                                var sa2data = data[id].Total;
+                                if (sa2data.over65 != undefined) {
+                                  count += sa2data.over65;
+                                }
+                                for (var k in data[id].Male) {
+                                  if (!ageSummaryM[k]) ageSummaryM[k] = 0;
+                                  ageSummaryM[k] += data[id].Male[k];
+                                }
+                                for (var k in data[id].Female) {
+                                  if (!ageSummaryF[k]) ageSummaryF[k] = 0;
+                                  ageSummaryF[k] += data[id].Female[k];
+                                }
+                                total += sa2data.Total;
+                                for (var k in smokers[id].Male["Regular smoker"]) {
+                                  if (!smokerAgeSummaryM[k]) smokerAgeSummaryM[k] = 0;
+                                  smokerAgeSummaryM[k] += smokers[id].Male["Regular smoker"][k]
+                                }
+                                for (var k in smokers[id].Female["Regular smoker"]) {
+                                  if (!smokerAgeSummaryF[k]) smokerAgeSummaryF[k] = 0;
+                                  smokerAgeSummaryF[k] += smokers[id].Female["Regular smoker"][k]
+                                }
+                                smokerTotal += smokers[id].Total;
+                              }
+                            }
+                            feature.data = {
+                              name: name + " DHB",
+                              type: "DHB",
+                              Female: ageSummaryF,
+                              Male: ageSummaryM,
+                              smokerData: {
+                                Female: {
+                                  "Regular smoker": smokerAgeSummaryF
+                                },
+                                Male: {
+                                  "Regular smoker": smokerAgeSummaryM
+                                },
+                                Total: smokerTotal
+                              },
+                              Total: {
+                                Total: total
+                              }
+                            }
+                            if (window.colour_DHB_by == "cancer") {
+                              count = 0;
+                              if (name == "Hutt") name = "Hutt Valley"
+                              if (name == "Midcentral") name = "MidCentral"
+                              if (name == "Capital and Coast") name = "Capital & Coast"
+                              for (var r of cancer) {
+                                if (r.Year == "2017" && r.DHB == name) {
+                                  count += parseInt(r.Cases);
+                                }
+                              }
+                              console.log(name, count, total);
+                              if (colour_mode == "pct") {
+                                count = count / total * 100;
+                              }
+                              var color = cancer_cmap(count);
+                            } else {
+                              var color = age_cmap(count);
+                            }
+
+                            return {
+                              color: "black",
+                              fillColor: color,
+                              fillOpacity: 1,
+                              weight: 1
+                            }
+                          }
+                        }).addTo(DHBLayer);
+                      });
                     });
                   });
                 });
@@ -589,7 +615,7 @@
 
       legend.onAdd = function (map) {
           var div = L.DomUtil.create('div', 'info legend');
-          var cancerLegend = "<div id='cancerLegend'>";
+          var cancerLegend = "<div id='cancerLegend'><div id='cancerPlot'></div>";
           if (colour_mode == "pct") {
             cancerLegend += "<h4>% cancer incidence</h4>";
           } else {

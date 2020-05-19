@@ -63,5 +63,6 @@ df.Cases[df.Cases == "-"] = None
 df["Year"] = df["Year"].astype(int)
 df["Cases"] = df["Cases"].astype('Int64')
 df = df[df.Sex != "AllSex"]
+df = df[df.Subgroup != "All Cancers - C00-C96, D45-D47"]
 df = df.sort_values(by=list(df.columns), ascending=False)
 df.to_csv("NZ_cancer.csv", index=False)
