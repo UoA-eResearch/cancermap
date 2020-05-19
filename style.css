@@ -1,0 +1,173 @@
+html, body, #map {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.info {
+    padding: 15px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: white;
+}
+.legend {
+    line-height: 18px;
+    color: white;
+    width: 207px;
+    padding: 20px;
+    margin-top: 30px !important;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    clear: left;
+}
+.legend i.circle {
+    border-radius: 50%;
+}
+.legend-source {
+  font-size: 70%;
+  color: #999;
+  clear: both;
+  float: right;
+}
+.pano {
+  height: 300px;
+  width: 500px;
+}
+table {
+  border: 3px solid #000000;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table tbody td {
+  font-size: 13px;
+}
+table thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-bottom: 3px solid #000000;
+}
+table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+
+.leaflet-touch .leaflet-control-layers-toggle {
+  width: 60px;
+  height: 60px;
+}
+
+
+
+#title {
+  position: absolute;
+  top: 15;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1000;
+  width: 50%;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  background-color:rgba(0, 0, 0, 0.8);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 2px 2px #000000;
+  font-weight: normal;
+}
+
+.leaflet-touch .leaflet-bar a {
+  background-color: transparent;
+  color: white;
+}
+
+.leaflet-touch .leaflet-bar a:hover {
+  background-color: gray;
+  color: #555;
+}
+
+.leaflet-control-geosearch {
+  color: black !important;
+  z-index: 1000;
+}
+
+.leaflet-control-geosearch a {
+  color: black !important;
+}
+
+.leaflet-touch .leaflet-control-geosearch a.leaflet-bar-part:before {
+  border-top: 2px solid white;
+}
+
+.leaflet-touch .leaflet-control-geosearch a.leaflet-bar-part:after {
+  border: 2px solid white;
+}
+
+.leaflet-control {
+  background-color: rgba(0,0,0,0.8) !important;
+  color: white;
+}
+
+#colorbar {
+  position: relative;
+  margin-top: 15px;
+  width: 80px;
+}
+#colorbar > #gradient {
+  width: 20px;
+  height: 100px;
+}
+#colorbar .label {
+  position: absolute;
+  left: 25px;
+  line-height: 0px;
+}
+#colorbar > #max {
+  top: 0;
+}
+#colorbar > #maxsuffix {
+  position: absolute;
+  right: -10px;
+  top: 5px;
+}
+#colorbar > #mid {
+  top: 50%;
+}
+#colorbar > #min {
+  bottom: 0;
+}
+
+.leaflet-marker-icon {
+  background-color:white;
+  border-radius: 14px;
+}
+
+.hospital-icon {
+  background-image: url("https://wiki.openstreetmap.org/w/images/3/33/Hospital-14.svg");
+  
+}
+.hospital-icon div {
+  background-color:white;
+}
