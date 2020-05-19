@@ -22,6 +22,7 @@
       var colour_mode = "pct";
       var CANCER_MAX_DOMAIN = .8;
       var AGE_MAX_DOMAIN = 20;
+      window.year = 2017;
       if (urlParams.get("colour_by") == "raw_counts") {
         colour_mode = "raw_counts";
         CANCER_MAX_DOMAIN = 2500;
@@ -234,6 +235,7 @@
         var layout = {
             title: title,
             height: 300,
+            width: 800,
             barmode: 'stack',
             xaxis: {
                 title: "Age Bracket"
@@ -294,7 +296,7 @@
           }];
           layout.title = "Gender and age distribution of COVID-19 cases in " + data.name + " DHB.<br>Active cases: " + count.toLocaleString() + ". Total cases: " + totalCases.toLocaleString() + ". Total hospital beds: " + beds.toLocaleString();
           layout.yaxis.title = "Number of cases";
-          var container = $("<div id='covid_plot'></div>");
+          var container = $("<div id='covid_plot' class='plot'></div>");
           $(e.popup._contentNode).append(container);
           console.log(container)
           Plotly.newPlot(container[0], covidPlotData, layout);
@@ -308,7 +310,7 @@
 
         var smokerData = data.smokerData;
         console.log(smokerData);
-        var container = $("<div id='smoker_plot'></div>");
+        var container = $("<div id='smoker_plot' class='plot'></div>");
         $(e.popup._contentNode).append(container);
         layout.title = "Regular smokers in " + data.name + (data.type == "DHB" ? " DHB" : "") + ". Total people stated: " + smokerData.Total.toLocaleString();
 
@@ -328,6 +330,36 @@
           }
         ];
         Plotly.newPlot(container[0], smokerPlotData, layout);
+        
+        if (data.type == 'DHB') {
+          var filtered_cancer = {};
+          for (var r of cancer) {
+            if (r.DHB == data.cancername && r.Cases && r.Year == window.year) {
+              if (!filtered_cancer[r.Subgroup]) filtered_cancer[r.Subgroup] = 0;
+              filtered_cancer[r.Subgroup] += parseInt(r.Cases);
+            }
+          }
+          console.log(filtered_cancer)
+          var keys = Object.keys(filtered_cancer);
+          keys.sort(function(a, b,) { return filtered_cancer[b] - filtered_cancer[a] });
+          var container = $("<div id='cancer_plot' class='plot'></div>");
+          $(e.popup._contentNode).append(container);
+          var cancerPlotData = [{
+              labels: keys.slice(0,10),
+              values: keys.slice(0,10).map(k => filtered_cancer[k]),
+              type: 'pie',
+              textinfo: "label+value",
+              textposition: "outside",
+          }];
+          layout = {
+            title: "Top 10 cancer types in " + data.name + (data.type == "DHB" ? " DHB" : "") + " in " + window.year,
+            showlegend: false,
+            width: 800,
+            height: 300,
+          }
+          Plotly.newPlot(container[0], cancerPlotData, layout);
+        }
+
       }
       
       $.getJSON("ages.json", function(data) {
@@ -365,8 +397,8 @@
                   var name = feature.properties.SA22018_V1_NAME;
                   saData.name = name;
                   saData.smokerData = smokers[id];
-                  var popup = '<div id="graph"></div>';
-                  layer.bindTooltip(name).bindPopup(popup, {data: saData, minWidth: 800, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
+                  var popup = '<div id="graph" class="plot"></div>';
+                  layer.bindTooltip(name).bindPopup(popup, {data: saData, minWidth: 1600, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
                   layer.on("mouseover", function(e) {
                     layer.setStyle({color: "orange"});
                     layer.bringToFront();
@@ -403,7 +435,7 @@
                         title: "Cancer incidence over time",
                         barmode: 'stack',
                         height: 300,
-                        width: 400,
+                        width: 300,
                         margin: {
                           pad: 0,
                           l: 40,
@@ -417,6 +449,7 @@
                         var id = event.target.id;
                         var d = data.points[0].x || data.points[0].label;
                         console.log(d);
+                        window.year = d;
                         DHB_layer.setStyle(function(feature) {
                           var count = cancer.filter(r => r.DHB == feature.data.cancername && r.Cases && r.Year == d).reduce((sum, r) => sum + parseInt(r.Cases), 0);
                           if (colour_mode == "pct") {
@@ -431,12 +464,12 @@
                         console.log(NZ_DHB2012);
                         window.DHB_layer = new L.GeoJSON(NZ_DHB2012, {
                           onEachFeature: function (feature, layer) {
-                            var popup = '<div id="graph"></div>';
+                            var popup = '<div id="graph" class="plot"></div>';
                             var name = feature.properties.NAME;
                             if (name == "Hutt") name = "Hutt Valley"
                             if (name == "Midcentral") name = "MidCentral"
                             feature.data.name = name;
-                            layer.bindTooltip(name + " DHB").bindPopup(popup, {data: feature.data, minWidth: 800, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
+                            layer.bindTooltip(name + " DHB").bindPopup(popup, {data: feature.data, minWidth: 1800, autoPanPadding: [400, 400]}).on("popupopen", popupHandler);
                             var count = 0;
                             for (var i in covidCasesByDHB) {
                               var c = covidCasesByDHB[i];
@@ -509,7 +542,7 @@
                               if (name == "Capital and Coast") name = "Capital & Coast"
                               feature.data.cancername = name;
                               for (var r of cancer) {
-                                if (r.Year == "2017" && r.DHB == name) {
+                                if (r.Year == window.year && r.DHB == name) {
                                   count += parseInt(r.Cases);
                                 }
                               }
