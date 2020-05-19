@@ -413,9 +413,23 @@
                         }
                       }
                       Plotly.newPlot($("#cancerPlot")[0], cancerPlotData, layout);
+                      $("#cancerPlot").on('plotly_hover', function(event, data){
+                        var id = event.target.id;
+                        var d = data.points[0].x || data.points[0].label;
+                        console.log(d);
+                        DHB_layer.setStyle(function(feature) {
+                          var count = cancer.filter(r => r.DHB == feature.data.cancername && r.Cases && r.Year == d).reduce((sum, r) => sum + parseInt(r.Cases), 0);
+                          if (colour_mode == "pct") {
+                            count = count / feature.data.Total.Total * 100;
+                          }
+                          return {
+                            fillColor: cancer_cmap(count)
+                          }
+                        });
+                      });
                       $.getJSON("NZ_DHB2012.geojson", function(NZ_DHB2012) {
                         console.log(NZ_DHB2012);
-                        new L.GeoJSON(NZ_DHB2012, {
+                        window.DHB_layer = new L.GeoJSON(NZ_DHB2012, {
                           onEachFeature: function (feature, layer) {
                             var popup = '<div id="graph"></div>';
                             var name = feature.properties.NAME;
@@ -493,6 +507,7 @@
                               if (name == "Hutt") name = "Hutt Valley"
                               if (name == "Midcentral") name = "MidCentral"
                               if (name == "Capital and Coast") name = "Capital & Coast"
+                              feature.data.cancername = name;
                               for (var r of cancer) {
                                 if (r.Year == "2017" && r.DHB == name) {
                                   count += parseInt(r.Cases);
