@@ -613,7 +613,7 @@
         new L.GeoJSON(geojson, {
           style: function(feature) {
             return {
-              fillColor: NZIMD_cmap(feature.properties.IMDRank),
+              fillColor: NZIMD_cmap(feature.properties.HlthRank),
               fillOpacity: .7,
               color: "gray",
               dashArray: "2,2",
@@ -689,7 +689,7 @@
           }
           div.innerHTML += ageLegend + "</div>";
 
-          var imdLegend = "<div id='imdLegend'><h4>NZIMD Rank</h4>";
+          var imdLegend = "<div id='imdLegend'><h4>NZIMD Health Rank</h4>";
           for (var i = 0; i <= 6000; i += 2000) {
             imdLegend += `<i style="background: ${NZIMD_cmap(i)}"></i>${i}<br>`;
           }
