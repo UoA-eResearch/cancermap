@@ -10,6 +10,7 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+  <script src="https://eknowles.github.io/resizerjs/resizer.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -28,6 +29,7 @@
     </div>
   </div>
   <script>
+    const myResizer = new Resizer('.row');
     var map = L.map('map', {
       zoom: 6,
       minZoom: 6,
@@ -91,7 +93,7 @@
           var cancer = feature.properties.cancer["maori_all_cancer_18+"] + feature.properties.cancer["non-maori_all_cancer_18+"];
           cancer = cancer / feature.properties.smoking["total_15+"] * 100
           feature.cancer = cancer;
-          console.log(feature, cancer);
+          //console.log(feature, cancer);
           return {
             fillColor: cmap(cancer),
             fillOpacity: .7,
