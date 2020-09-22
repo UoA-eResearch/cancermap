@@ -170,7 +170,7 @@
         title: "Cancer types in NZ",
         showlegend: false,
       }
-      Plotly.newPlot("cancertypes", cancerPlotData, layout);
+      Plotly.newPlot("cancertypes", cancerPlotData, layout, {responsive: true});
 
       window.s_keys = Object.keys(s).filter(k => k != "total_15+")
 
@@ -191,7 +191,7 @@
         title: "Smoking in NZ",
         showlegend: false,
       }
-      Plotly.newPlot("smoking", smokingPlotData, layout);
+      Plotly.newPlot("smoking", smokingPlotData, layout, {responsive: true});
     });
 
     var legend = L.control({position: 'bottomright'});
