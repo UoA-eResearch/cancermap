@@ -102,6 +102,42 @@
         },
         onEachFeature: function (feature, layer) {
           layer.bindTooltip(feature.properties.TALB2018_1 + " " + feature.cancer.toLocaleString() + "%")
+          layer.on('mouseover',function(event) {
+            var c = feature.properties.cancer;
+            Plotly.update(cancertypes,
+              {
+                values: [[c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer, c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]],
+              },
+              {
+                title: "Cancer types in " + feature.properties.TALB2018_1,
+              }
+            );
+            Plotly.update(smoking,
+              {
+                values: [s_keys.map(k => feature.properties.smoking[k])],
+              },
+              {
+                title: "Smoking in " + feature.properties.TALB2018_1,
+              }
+            );
+          }).on("mouseout", function() {
+            Plotly.update(cancertypes,
+              {
+                values: [window.nz_cancer_values],
+              },
+              {
+                title: "Cancer types in NZ",
+              }
+            );
+            Plotly.update(smoking,
+              {
+                values: [window.nz_smoking],
+              },
+              {
+                title: "Smoking in NZ",
+              }
+            );
+          });
         },
         filter: function(feature, layer) {
           return feature.properties.cancer;
@@ -122,9 +158,10 @@
         }
       }
       console.log(c, s)
+      window.nz_cancer_values = [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer, c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]
       var cancerPlotData = [{
           labels: ["Māori breast cancer", "Māori prostate cancer", "Māori lung cancer", "Non-māori breast cancer", "Non-māori prostate cancer", "Non-māori lung cancer"],
-          values: [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer, c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]],
+          values: nz_cancer_values,
           type: 'pie',
           textinfo: "label+value",
           textposition: "outside",
@@ -132,29 +169,27 @@
       layout = {
         title: "Cancer types in NZ",
         showlegend: false,
-        width: 800,
-        height: 300,
       }
       Plotly.newPlot("cancertypes", cancerPlotData, layout);
 
-      var s_keys = Object.keys(s).filter(k => k != "total_15+")
+      window.s_keys = Object.keys(s).filter(k => k != "total_15+")
 
       String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1)
       }
 
+      window.nz_smoking = s_keys.map(k => s[k])
+
       var smokingPlotData = [{
           labels: s_keys.map(k => k.replace(/_/g, " ").replace("maori", "māori").capitalize()),
-          values: s_keys.map(k => s[k]),
+          values: nz_smoking,
           type: 'pie',
           textinfo: "label+value",
           textposition: "outside",
       }];
       layout = {
-        title: "Smokers in NZ",
+        title: "Smoking in NZ",
         showlegend: false,
-        width: 800,
-        height: 300,
       }
       Plotly.newPlot("smoking", smokingPlotData, layout);
     });
