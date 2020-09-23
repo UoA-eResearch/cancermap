@@ -24,6 +24,10 @@
   <div class="row" style="height: 100%">
     <div id="map"></div>
     <div id="plots">
+      <div id="controls">
+        <input type="checkbox" id="per" />
+        <label for="per">Display cancer/smoking values as per 100K people</label><br>
+      </div>
       <div id="cancertypes"></div>
       <div id="smoking"></div>
       <div id="age"></div>
@@ -87,7 +91,31 @@
     var MAX_DOMAIN = 9;
     var cmap = chroma.scale("Spectral").domain([MAX_DOMAIN, MIN_DOMAIN]);
 
+    $("#per").change(function(e) {
+      updatePlots(c, s, age_summary, "NZ")
+    });
+
     function updatePlots(c, s, age_summary, region) {
+      var c = {...c};
+      var s = {...s};
+      if ($("#per").is(":checked")) {
+        var total_maori = Object.values(age_summary.Maori).reduce((sum, x) => sum + x);
+        var total_nonmaori = Object.values(age_summary["Non-maori"]).reduce((sum, x) => sum + x);
+        for (var k in c) {
+          if (k.startsWith("maori")) {
+            c[k] = c[k] / total_maori * 1E5
+          } else {
+            c[k] = c[k] / total_nonmaori * 1E5
+          }
+        }
+        for (var k in s) {
+          if (k.startsWith("maori")) {
+            s[k] = s[k] / total_maori * 1E5
+          } else {
+            s[k] = s[k] / total_nonmaori * 1E5
+          }
+        }
+      }
       Plotly.update(cancertypes,
         {
           y: [

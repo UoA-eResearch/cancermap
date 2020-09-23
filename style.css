@@ -197,3 +197,7 @@ table thead th {
   width: 6px;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+#controls {
+  text-align: center
+}
