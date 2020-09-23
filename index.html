@@ -26,6 +26,7 @@
     <div id="plots">
       <div id="cancertypes"></div>
       <div id="smoking"></div>
+      <div id="age"></div>
     </div>
   </div>
   <script>
@@ -86,6 +87,42 @@
     var MAX_DOMAIN = 9;
     var cmap = chroma.scale("Spectral").domain([MAX_DOMAIN, MIN_DOMAIN]);
 
+    function updatePlots(c, s, age_summary, region) {
+      Plotly.update(cancertypes,
+        {
+          y: [
+            [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer],
+            [c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]
+          ],
+        },
+        {
+          title: "Cancer types in " + region + " from 2008-2018",
+        }
+      );
+      Plotly.update(smoking,
+        {
+          y: [
+            [s["maori_male_smoker"], s["maori_male_non-smoker"], s["maori_female_smoker"], s["maori_female_non-smoker"]],
+            [s["non-maori_male_smoker"], s["non-maori_male_non-smoker"], s["non-maori_female_smoker"], s["non-maori_female_non-smoker"]]
+          ],
+        },
+        {
+          title: "Smoking in " + region + " as per the 2018 census",
+        }
+      );
+      Plotly.update(age,
+        {
+          y: [
+            ageKeys.map(k => age_summary["Maori"][k]),
+            ageKeys.map(k => age_summary["Non-maori"][k])
+          ],
+        },
+        {
+          title: "Age distribution in " + region + " as per the 2018 census",
+        }
+      );
+    }
+
     $.getJSON("data/TALB_2018.geojson", function (geojson) {
       console.log(geojson);
       var geojsonLayer = new L.GeoJSON(geojson, {
@@ -105,61 +142,22 @@
         onEachFeature: function (feature, layer) {
           layer.bindTooltip(feature.properties.TALB2018_1 + " " + feature.cancer.toLocaleString() + "%")
           layer.on('mouseover',function(event) {
-            var c = feature.properties.cancer;
-            var s = feature.properties.smoking;
-            Plotly.update(cancertypes,
-              {
-                y: [
-                  [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer],
-                  [c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]
-                ],
-              },
-              {
-                title: "Cancer types in " + feature.properties.TALB2018_1 + " from 2008-2018",
-              }
-            );
-            Plotly.update(smoking,
-              {
-                y: [
-                  [s["maori_male_smoker"], s["maori_male_non-smoker"], s["maori_female_smoker"], s["maori_female_non-smoker"]],
-                  [s["non-maori_male_smoker"], s["non-maori_male_non-smoker"], s["non-maori_female_smoker"], s["non-maori_female_non-smoker"]]
-                ],
-              },
-              {
-                title: "Smoking in " + feature.properties.TALB2018_1 + " as per the 2018 census",
-              }
-            );
+            updatePlots(feature.properties.cancer, feature.properties.smoking, feature.properties.age, feature.properties.TALB2018_1)
           }).on("mouseout", function() {
-            Plotly.update(cancertypes,
-              {
-                y: [
-                  [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer],
-                  [c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]
-                ],
-              },
-              {
-                title: "Cancer types in NZ from 2008-2018",
-              }
-            );
-            Plotly.update(smoking,
-              {
-                y: [
-                  [s["maori_male_smoker"], s["maori_male_non-smoker"], s["maori_female_smoker"], s["maori_female_non-smoker"]],
-                  [s["non-maori_male_smoker"], s["non-maori_male_non-smoker"], s["non-maori_female_smoker"], s["non-maori_female_non-smoker"]]
-                ],
-              },
-              {
-                title: "Smoking in NZ as per the 2018 census",
-              }
-            );
+            updatePlots(window.c, window.s, window.age_summary, "NZ")
           });
         },
         filter: function(feature, layer) {
           return feature.properties.cancer;
         },
       }).addTo(map);
-      var c = {}
-      var s = {}
+      window.c = {}
+      window.s = {}
+      window.age_summary = {
+        "Maori": {},
+        "Non-maori": {}
+      }
+      window.ageKeys = ["0-4 years", "5-9 years", "10-14 years", "15-19 years", "20-24 years", "25-29 years", "30-34 years", "35-39 years", "40-44 years", "45-49 years", "50-54 years", "55-59 years", "60-64 years", "65-69 years", "70-74 years", "75-79 years", "80-84 years", "85 years and over"];
       for (var f of geojson.features) {
         for (var k in f.properties.cancer) {
           if (!c[k]) c[k] = 0;
@@ -171,8 +169,14 @@
           if (!s[k]) s[k] = 0;
           s[k] += f.properties.smoking[k];
         }
+        for (var k of ageKeys) {
+          if (!age_summary.Maori[k]) age_summary.Maori[k] = 0;
+          if (!age_summary["Non-maori"][k]) age_summary["Non-maori"][k] = 0;
+          if (f.properties.age.Maori[k]) age_summary.Maori[k] += f.properties.age.Maori[k];
+          if (f.properties.age["Non-maori"][k]) age_summary["Non-maori"][k] += f.properties.age["Non-maori"][k];
+        }
       }
-      console.log(c, s)
+      console.log(c, s, age_summary)
       var cancerPlotData = [{
         name: "Māori",
         x: ["Breast cancer", "Prostate cancer", "Lung cancer"],
@@ -188,9 +192,10 @@
       layout = {
         title: "Cancer types in NZ from 2008-2018",
         //showlegend: false,
-        //barmode: 'stack',
+        barmode: 'stack',
         textinfo: "label+value",
         textposition: "outside",
+        height: 300,
       }
       Plotly.newPlot("cancertypes", cancerPlotData, layout, {responsive: true});
 
@@ -209,11 +214,34 @@
       layout = {
         title: "Smoking in NZ as per the 2018 census",
         //showlegend: false,
-        //barmode: 'stack',
+        barmode: 'stack',
         textinfo: "label+value",
         textposition: "outside",
+        height: 300,
       }
       Plotly.newPlot("smoking", smokingPlotData, layout, {responsive: true});
+
+      var agePlotData = [{
+        name: "Māori",
+        x: ageKeys,
+        y: ageKeys.map(k => age_summary.Maori[k]),
+        type: 'bar',
+      },
+      {
+        name: "Non-māori",
+        x: ageKeys,
+        y: ageKeys.map(k => age_summary["Non-maori"][k]),
+        type: 'bar',
+      }];
+      layout = {
+        title: "Age distribution in NZ as per the 2018 census",
+        //showlegend: false,
+        barmode: 'stack',
+        textinfo: "label+value",
+        textposition: "outside",
+        height: 300,
+      }
+      Plotly.newPlot("age", agePlotData, layout, {responsive: true});
     });
 
     var legend = L.control({position: 'bottomright'});
