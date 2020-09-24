@@ -89,7 +89,7 @@
 
     var MIN_DOMAIN = 5;
     var MAX_DOMAIN = 9;
-    var cmap = chroma.scale("Spectral").domain([MAX_DOMAIN, MIN_DOMAIN]);
+    var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
 
     $("#per").change(function(e) {
       updatePlots(c, s, age_summary, "NZ")
