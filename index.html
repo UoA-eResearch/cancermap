@@ -28,9 +28,12 @@
         <input type="checkbox" id="per" />
         <label for="per">Display cancer/smoking values as per 100K people</label><br>
       </div>
-      <div id="cancertypes"></div>
-      <div id="smoking"></div>
+      <div class="row">
+        <div id="cancertypes" style="width:50%"></div>
+        <div id="smoking" style="width:50%"></div>
+      </div>
       <div id="age"></div>
+      <div id="pcp"></div>
     </div>
   </div>
   <script>
@@ -65,9 +68,9 @@
     map.getPane('labels').style.zIndex = 625;
     map.getPane('labels').style.pointerEvents = 'none';
     var labels = L.tileLayer.provider("Stamen.TonerLabels", {
-        pane: "labels",
-        interactive: false,
-        opacity: .8,
+      pane: "labels",
+      interactive: false,
+      opacity: .8,
     });
 
     map.createPane('whitelabels');
@@ -75,9 +78,9 @@
     map.getPane('whitelabels').style.pointerEvents = 'none';
     map.getPane('whitelabels').style.filter = 'invert(100%)';
     var whitelabels = L.tileLayer.provider("Stamen.TonerLabels", {
-        pane: "whitelabels",
-        interactive: false,
-        opacity: .8,
+      pane: "whitelabels",
+      interactive: false,
+      opacity: .8,
     });
 
     var overlayMaps = {
@@ -91,13 +94,13 @@
     var MAX_DOMAIN = 9;
     var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
 
-    $("#per").change(function(e) {
+    $("#per").change(function (e) {
       updatePlots(c, s, age_summary, "NZ")
     });
 
     function updatePlots(c, s, age_summary, region) {
-      var c = {...c};
-      var s = {...s};
+      var c = { ...c };
+      var s = { ...s };
       if ($("#per").is(":checked")) {
         var total_maori = Object.values(age_summary.Maori).reduce((sum, x) => sum + x);
         var total_nonmaori = Object.values(age_summary["Non-maori"]).reduce((sum, x) => sum + x);
@@ -153,8 +156,9 @@
 
     $.getJSON("data/TALB_2018.geojson", function (geojson) {
       console.log(geojson);
+      window.geojson = geojson;
       var geojsonLayer = new L.GeoJSON(geojson, {
-        style: function(feature) {
+        style: function (feature) {
           var cancer = feature.properties.cancer["maori_all_cancer_18+"] + feature.properties.cancer["non-maori_all_cancer_18+"];
           cancer = cancer / feature.properties.smoking["total_15+"] * 100
           feature.cancer = cancer;
@@ -169,13 +173,13 @@
         },
         onEachFeature: function (feature, layer) {
           layer.bindTooltip(feature.properties.TALB2018_1 + " " + feature.cancer.toLocaleString() + "%")
-          layer.on('mouseover',function(event) {
+          layer.on('mouseover', function (event) {
             updatePlots(feature.properties.cancer, feature.properties.smoking, feature.properties.age, feature.properties.TALB2018_1)
-          }).on("mouseout", function() {
+          }).on("mouseout", function () {
             updatePlots(window.c, window.s, window.age_summary, "NZ")
           });
         },
-        filter: function(feature, layer) {
+        filter: function (feature, layer) {
           return feature.properties.cancer;
         },
       }).addTo(map);
@@ -225,7 +229,7 @@
         textposition: "outside",
         height: 300,
       }
-      Plotly.newPlot("cancertypes", cancerPlotData, layout, {responsive: true});
+      Plotly.newPlot("cancertypes", cancerPlotData, layout, { responsive: true });
 
       var smokingPlotData = [{
         name: "Māori",
@@ -247,7 +251,7 @@
         textposition: "outside",
         height: 300,
       }
-      Plotly.newPlot("smoking", smokingPlotData, layout, {responsive: true});
+      Plotly.newPlot("smoking", smokingPlotData, layout, { responsive: true });
 
       var agePlotData = [{
         name: "Māori",
@@ -269,10 +273,48 @@
         textposition: "outside",
         height: 300,
       }
-      Plotly.newPlot("age", agePlotData, layout, {responsive: true});
+      Plotly.newPlot("age", agePlotData, layout, { responsive: true });
+
+      var pcpPlotData = [{
+        type: 'parcoords',
+        line: {
+          color: Object.keys(geojson.features),
+          colorscale: 'jet'
+        },
+
+        dimensions: [
+          {
+            label: 'Māori breast cancer',
+            values: geojson.features.map(f => f.properties.cancer.maori_breast_cancer)
+          }, {
+            label: 'Māori prostate cancer',
+            values: geojson.features.map(f => f.properties.cancer.maori_prostate_cancer),
+          }, {
+            label: 'Māori lung cancer',
+            values: geojson.features.map(f => f.properties.cancer.maori_lung_cancer)
+          },
+          {
+            label: 'Non-māori breast cancer',
+            values: geojson.features.map(f => f.properties.cancer["non-maori_breast_cancer"])
+          }, {
+            label: 'Non-māori prostate cancer',
+            values: geojson.features.map(f => f.properties.cancer["non-maori_prostate_cancer"]),
+          }, {
+            label: 'Non-māori lung cancer',
+            values: geojson.features.map(f => f.properties.cancer["non-maori_lung_cancer"])
+          },
+        ]
+      }];
+
+      layout = {
+        title: "Parallel coordinate plot of cancer distribution in NZ",
+        //height: 300
+      }
+
+      Plotly.newPlot('pcp', pcpPlotData, layout, { responsive: true });
     });
 
-    var legend = L.control({position: 'bottomright'});
+    var legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
@@ -283,7 +325,7 @@
         if (i == MAX_DOMAIN) i_text = ">=" + i
         cancerLegend += '<i style="background:' + cmap(i) + '"></i> ' + i_text + '<br>';
       }
-      div.innerHTML += cancerLegend + "</div>";
+      div.innerHTML += cancerLegend + "</div><div>Hover over an area to show plots for that area</div>";
       return div;
     };
 
