@@ -152,6 +152,21 @@
           title: "Age distribution in " + region + " as per the 2018 census",
         }
       );
+      var pcpDataUpdate = {
+        line: {
+          color: Object.keys(geojson.features),
+          colorscale: 'Jet'
+        }
+      }
+      if (region != "NZ") {
+        pcpDataUpdate = {
+          line: {
+            color: Object.keys(geojson.features).map(k => geojson.features[k].properties.TALB2018_1 == region ? 1 : 0),
+            colorscale: [[0, 'gray'], [1, 'red']]
+          }
+        }
+      }
+      Plotly.restyle(pcp, pcpDataUpdate);
     }
 
     $.getJSON("data/TALB_2018.geojson", function (geojson) {
@@ -279,7 +294,7 @@
         type: 'parcoords',
         line: {
           color: Object.keys(geojson.features),
-          colorscale: 'jet'
+          colorscale: 'Jet'
         },
 
         dimensions: [
