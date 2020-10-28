@@ -104,10 +104,40 @@
 
     $("#per").change(function (e) {
       updatePlots(c, s, age_summary, "NZ")
+      createPCP($("#cancertype").val());
     });
 
     function createPCP(ct) {
       console.log(ct);
+      var dimensions = []
+      var pcpColumns = {
+        'Māori 2010-2012': "maori2010-2012",
+        'Māori 2013-2015': "maori2013-2015",
+        'Māori 2016-2018': "maori2016-2018",
+        'Non-māori 2010-2012': "non-maori2010-2012",
+        'Non-māori 2013-2015': "non-maori2013-2015",
+        'Non-māori 2016-2018': "non-maori2016-2018",
+      }
+      for (var k in pcpColumns) {
+        if ($("#per").is(":checked")) {
+          var values = []
+          for (var f of geojson.features) {
+            if (k.startsWith("Māori")) {
+              var denominator = f.properties.age.Maori.Total
+            } else {
+              var denominator = f.properties.age["Non-maori"].Total
+            }
+            values.push(f.properties.cancer[ct + pcpColumns[k]] / denominator * 1E5)
+          }
+        } else {
+          var values = geojson.features.map(f => f.properties.cancer[ct + pcpColumns[k]])
+        }
+        dimensions.push({
+          label: k,
+          values: values
+        })
+      }
+      console.log(dimensions)
       var pcpPlotData = [{
         type: 'parcoords',
         line: {
@@ -115,28 +145,7 @@
           colorscale: 'Jet'
         },
 
-        dimensions: [
-          {
-            label: 'Māori 2010-2012',
-            values: geojson.features.map(f => f.properties.cancer[ct + "maori2010-2012"])
-          }, {
-            label: 'Māori 2013-2015',
-            values: geojson.features.map(f => f.properties.cancer[ct + "maori2013-2015"]),
-          }, {
-            label: 'Māori 2016-2018',
-            values: geojson.features.map(f => f.properties.cancer[ct + "maori2016-2018"])
-          },
-          {
-            label: 'Non-māori 2010-2012',
-            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2010-2012"])
-          }, {
-            label: 'Non-māori 2013-2015',
-            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2013-2015"]),
-          }, {
-            label: 'Non-māori 2016-2018',
-            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2016-2018"])
-          },
-        ]
+        dimensions: dimensions
       }];
 
       layout = {
@@ -155,8 +164,8 @@
       var c = { ...c };
       var s = { ...s };
       if ($("#per").is(":checked")) {
-        var total_maori = Object.values(age_summary.Maori).reduce((sum, x) => sum + x);
-        var total_nonmaori = Object.values(age_summary["Non-maori"]).reduce((sum, x) => sum + x);
+        var total_maori = age_summary.Maori.Total;
+        var total_nonmaori = age_summary["Non-maori"].Total;
         for (var k in c) {
           if (!k.includes("non-maori")) {
             c[k] = c[k] / total_maori * 1E5
@@ -269,7 +278,7 @@
           if (!s[k]) s[k] = 0;
           s[k] += f.properties.smoking[k];
         }
-        for (var k of ageKeys) {
+        for (var k in f.properties.age.Maori) {
           if (!age_summary.Maori[k]) age_summary.Maori[k] = 0;
           if (!age_summary["Non-maori"][k]) age_summary["Non-maori"][k] = 0;
           if (f.properties.age.Maori[k]) age_summary.Maori[k] += f.properties.age.Maori[k];
