@@ -34,6 +34,14 @@
       </div>
       <div id="age"></div>
       <div id="pcp"></div>
+      <div style="text-align: center;">
+        <label for="cancertype">Parallel coordinate plot cancer type:</label>
+        <select id="cancertype">
+          <option value="breast">Breast cancer</option>
+          <option value="prostate">Prostate cancer</option>
+          <option value="lung" selected>Lung cancer</option>
+        </select>
+      </div>
     </div>
   </div>
   <script>
@@ -90,13 +98,58 @@
 
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-    var MIN_DOMAIN = 5;
-    var MAX_DOMAIN = 9;
+    var MIN_DOMAIN = 1;
+    var MAX_DOMAIN = 3;
     var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
 
     $("#per").change(function (e) {
       updatePlots(c, s, age_summary, "NZ")
     });
+
+    function createPCP(ct) {
+      console.log(ct);
+      var pcpPlotData = [{
+        type: 'parcoords',
+        line: {
+          color: Object.keys(geojson.features),
+          colorscale: 'Jet'
+        },
+
+        dimensions: [
+          {
+            label: 'Māori 2010-2012',
+            values: geojson.features.map(f => f.properties.cancer[ct + "maori2010-2012"])
+          }, {
+            label: 'Māori 2013-2015',
+            values: geojson.features.map(f => f.properties.cancer[ct + "maori2013-2015"]),
+          }, {
+            label: 'Māori 2016-2018',
+            values: geojson.features.map(f => f.properties.cancer[ct + "maori2016-2018"])
+          },
+          {
+            label: 'Non-māori 2010-2012',
+            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2010-2012"])
+          }, {
+            label: 'Non-māori 2013-2015',
+            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2013-2015"]),
+          }, {
+            label: 'Non-māori 2016-2018',
+            values: geojson.features.map(f => f.properties.cancer[ct + "non-maori2016-2018"])
+          },
+        ]
+      }];
+
+      layout = {
+        title: "Parallel coordinate plot of " + ct + " cancer distribution in NZ",
+        //height: 300
+      }
+
+      Plotly.newPlot('pcp', pcpPlotData, layout, { responsive: true });
+    }
+
+    $("#cancertype").change(function(e) {
+      createPCP(this.value);
+    })
 
     function updatePlots(c, s, age_summary, region) {
       var c = { ...c };
@@ -105,7 +158,7 @@
         var total_maori = Object.values(age_summary.Maori).reduce((sum, x) => sum + x);
         var total_nonmaori = Object.values(age_summary["Non-maori"]).reduce((sum, x) => sum + x);
         for (var k in c) {
-          if (k.startsWith("maori")) {
+          if (!k.includes("non-maori")) {
             c[k] = c[k] / total_maori * 1E5
           } else {
             c[k] = c[k] / total_nonmaori * 1E5
@@ -122,12 +175,12 @@
       Plotly.update(cancertypes,
         {
           y: [
-            [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer],
-            [c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]]
+            [c["breastmaori2016-2018"], c["prostatemaori2016-2018"], c["lungmaori2016-2018"]],
+            [c["breastnon-maori2016-2018"], c["prostatenon-maori2016-2018"], c["lungnon-maori2016-2018"]]
           ],
         },
         {
-          title: "Cancer types in " + region + " from 2008-2018",
+          title: "Cancer types in " + region + " from 2016-2018",
         }
       );
       Plotly.update(smoking,
@@ -174,7 +227,7 @@
       window.geojson = geojson;
       var geojsonLayer = new L.GeoJSON(geojson, {
         style: function (feature) {
-          var cancer = feature.properties.cancer["maori_all_cancer_18+"] + feature.properties.cancer["non-maori_all_cancer_18+"];
+          var cancer = feature.properties.cancer["total 18+ all cancertotal2016-2018"];
           cancer = cancer / feature.properties.smoking["total_15+"] * 100
           feature.cancer = cancer;
           //console.log(feature, cancer);
@@ -227,17 +280,17 @@
       var cancerPlotData = [{
         name: "Māori",
         x: ["Breast cancer", "Prostate cancer", "Lung cancer"],
-        y: [c.maori_breast_cancer, c.maori_prostate_cancer, c.maori_lung_cancer],
+        y: [c["breastmaori2016-2018"], c["prostatemaori2016-2018"], c["lungmaori2016-2018"]],
         type: 'bar',
       },
       {
         name: "Non-māori",
         x: ["Breast cancer", "Prostate cancer", "Lung cancer"],
-        y: [c["non-maori_breast_cancer"], c["non-maori_prostate_cancer"], c["non-maori_lung_cancer"]],
+        y: [c["breastnon-maori2016-2018"], c["prostatenon-maori2016-2018"], c["lungnon-maori2016-2018"]],
         type: 'bar',
       }];
       layout = {
-        title: "Cancer types in NZ from 2008-2018",
+        title: "Cancer types in NZ from 2016-2018",
         //showlegend: false,
         barmode: 'stack',
         textinfo: "label+value",
@@ -289,52 +342,15 @@
         height: 300,
       }
       Plotly.newPlot("age", agePlotData, layout, { responsive: true });
-
-      var pcpPlotData = [{
-        type: 'parcoords',
-        line: {
-          color: Object.keys(geojson.features),
-          colorscale: 'Jet'
-        },
-
-        dimensions: [
-          {
-            label: 'Māori breast cancer',
-            values: geojson.features.map(f => f.properties.cancer.maori_breast_cancer)
-          }, {
-            label: 'Māori prostate cancer',
-            values: geojson.features.map(f => f.properties.cancer.maori_prostate_cancer),
-          }, {
-            label: 'Māori lung cancer',
-            values: geojson.features.map(f => f.properties.cancer.maori_lung_cancer)
-          },
-          {
-            label: 'Non-māori breast cancer',
-            values: geojson.features.map(f => f.properties.cancer["non-maori_breast_cancer"])
-          }, {
-            label: 'Non-māori prostate cancer',
-            values: geojson.features.map(f => f.properties.cancer["non-maori_prostate_cancer"]),
-          }, {
-            label: 'Non-māori lung cancer',
-            values: geojson.features.map(f => f.properties.cancer["non-maori_lung_cancer"])
-          },
-        ]
-      }];
-
-      layout = {
-        title: "Parallel coordinate plot of cancer distribution in NZ",
-        //height: 300
-      }
-
-      Plotly.newPlot('pcp', pcpPlotData, layout, { responsive: true });
+      createPCP("lung");
     });
 
     var legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
-      var cancerLegend = "<div id='cancerLegend'><h4>Cancer registrations from 2008-2018 divided by 2018 adult population (percentage)</h4>";
-      for (var i = MIN_DOMAIN; i <= MAX_DOMAIN; i += 1) {
+      var cancerLegend = "<div id='cancerLegend'><h4>Cancer registrations from 2016-2018 divided by 2018 adult population (percentage)</h4>";
+      for (var i = MIN_DOMAIN; i <= MAX_DOMAIN; i += .5) {
         var i_text = i.toLocaleString();
         if (i == MIN_DOMAIN) i_text = "<=" + i
         if (i == MAX_DOMAIN) i_text = ">=" + i
