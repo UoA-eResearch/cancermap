@@ -42,6 +42,7 @@
           <option value="lung" selected>Lung cancer</option>
         </select>
       </div>
+      <div id="imd"></div>
     </div>
   </div>
   <script>
@@ -98,8 +99,9 @@
 
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-    var MIN_DOMAIN = 1;
-    var MAX_DOMAIN = 3;
+    const MIN_DOMAIN = 1;
+    const MAX_DOMAIN = 3;
+    const RATE_PER = 1E5;
     var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
 
     $("#per").change(function (e) {
@@ -127,7 +129,7 @@
             } else {
               var denominator = f.properties.age["Non-maori"].Total
             }
-            values.push(f.properties.cancer[ct + pcpColumns[k]] / denominator * 1E5)
+            values.push(f.properties.cancer[ct + pcpColumns[k]] / denominator * RATE_PER)
           }
         } else {
           var values = geojson.features.map(f => f.properties.cancer[ct + pcpColumns[k]])
@@ -163,24 +165,37 @@
     function updatePlots(c, s, age_summary, region) {
       var c = { ...c };
       var s = { ...s };
+      var imdY = [
+        geojson.features.map(f => f.properties.cancer["total 18+ all cancertotal2016-2018"]),
+        geojson.features.map(f => f.properties.cancer["breasttotal2016-2018"]),
+        geojson.features.map(f => f.properties.cancer["prostatetotal2016-2018"]),
+        geojson.features.map(f => f.properties.cancer["lungtotal2016-2018"]),
+      ]
       if ($("#per").is(":checked")) {
         var total_maori = age_summary.Maori.Total;
         var total_nonmaori = age_summary["Non-maori"].Total;
         for (var k in c) {
           if (!k.includes("non-maori")) {
-            c[k] = c[k] / total_maori * 1E5
+            c[k] = c[k] / total_maori * RATE_PER
           } else {
-            c[k] = c[k] / total_nonmaori * 1E5
+            c[k] = c[k] / total_nonmaori * RATE_PER
           }
         }
         for (var k in s) {
           if (k.startsWith("maori")) {
-            s[k] = s[k] / total_maori * 1E5
+            s[k] = s[k] / total_maori * RATE_PER
           } else {
-            s[k] = s[k] / total_nonmaori * 1E5
+            s[k] = s[k] / total_nonmaori * RATE_PER
           }
         }
+        imdY = [
+          geojsonPer100K.features.map(f => f.properties.cancer["total 18+ all cancertotal2016-2018"]),
+          geojsonPer100K.features.map(f => f.properties.cancer["breasttotal2016-2018"]),
+          geojsonPer100K.features.map(f => f.properties.cancer["prostatetotal2016-2018"]),
+          geojsonPer100K.features.map(f => f.properties.cancer["lungtotal2016-2018"]),
+        ]
       }
+      console.log(imdY)
       Plotly.update(cancertypes,
         {
           y: [
@@ -229,11 +244,32 @@
         }
       }
       Plotly.restyle(pcp, pcpDataUpdate);
+
+      Plotly.restyle(imd,
+        {
+          y: imdY,
+        }
+      );
     }
 
     $.getJSON("data/TALB_2018.geojson", function (geojson) {
       console.log(geojson);
       window.geojson = geojson;
+      // precalculate rates per 100K for each TALB
+      var geojsonPer100K = JSON.parse(JSON.stringify(geojson))
+      for (var f of geojsonPer100K.features) {
+        for (var k in f.properties.cancer) {
+          if (k.includes("total")) {
+            f.properties.cancer[k] = f.properties.cancer[k] / f.properties.age.Total.Total * RATE_PER
+          } else if (k.includes("non-maori")) {
+            f.properties.cancer[k] = f.properties.cancer[k] / f.properties.age["Non-maori"].Total * RATE_PER
+          } else {
+            f.properties.cancer[k] = f.properties.cancer[k] / f.properties.age["Maori"].Total * RATE_PER
+          }
+        }
+      }
+      window.geojsonPer100K = geojsonPer100K;
+      console.log(geojsonPer100K)
       var geojsonLayer = new L.GeoJSON(geojson, {
         style: function (feature) {
           var cancer = feature.properties.cancer["total 18+ all cancertotal2016-2018"];
@@ -352,6 +388,54 @@
       }
       Plotly.newPlot("age", agePlotData, layout, { responsive: true });
       createPCP("lung");
+
+      var depPlotData = [
+        {
+          x: geojson.features.map(f => f.properties.IMD18_mean),
+          y: geojson.features.map(f => f.properties.cancer["total 18+ all cancertotal2016-2018"]),
+          text: geojson.features.map(f => f.properties.TALB2018_1),
+          name: "All cancer",
+          mode: 'markers',
+          type: 'scatter'
+        },
+        {
+          x: geojson.features.map(f => f.properties.IMD18_mean),
+          y: geojson.features.map(f => f.properties.cancer["breasttotal2016-2018"]),
+          text: geojson.features.map(f => f.properties.TALB2018_1),
+          name: "Breast cancer",
+          mode: 'markers',
+          type: 'scatter'
+        },
+        {
+          x: geojson.features.map(f => f.properties.IMD18_mean),
+          y: geojson.features.map(f => f.properties.cancer["prostatetotal2016-2018"]),
+          text: geojson.features.map(f => f.properties.TALB2018_1),
+          name: "Prostate cancer",
+          mode: 'markers',
+          type: 'scatter'
+        },
+        {
+          x: geojson.features.map(f => f.properties.IMD18_mean),
+          y: geojson.features.map(f => f.properties.cancer["lungtotal2016-2018"]),
+          text: geojson.features.map(f => f.properties.TALB2018_1),
+          name: "Lung cancer",
+          mode: 'markers',
+          type: 'scatter'
+        }
+      ]
+      console.log(depPlotData)
+      layout = {
+        title: "IMD2018 deprivation vs cancer distribution in NZ",
+        xaxis: {
+          title: "Mean IMD2018 deprivation rank"
+        },
+        yaxis: {
+          title: "# of cancer cases"
+        },
+        //showlegend: false,
+        height: 600,
+      }
+      Plotly.newPlot("imd", depPlotData, layout, { responsive: true });
     });
 
     var legend = L.control({ position: 'bottomright' });
