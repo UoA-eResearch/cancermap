@@ -11,10 +11,16 @@ body, html {
   display: flex;
   width: 100%;
 }
+#mainrow {
+  height: calc(100% - 40px)
+}
 #map, #plots {
   flex: auto;
   width: 0;
   height: 100%;
+}
+#plots {
+  overflow-y: auto;
 }
 .plot {
   width: 100%;
