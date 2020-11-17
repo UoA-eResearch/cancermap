@@ -35,11 +35,15 @@
       <div id="age"></div>
       <div id="pcp"></div>
       <div style="text-align: center;">
-        <label for="cancertype">Parallel coordinate plot cancer type:</label>
+        <label for="cancertype">Parallel coordinate plot options:</label>
         <select id="cancertype">
           <option value="breast">Breast cancer</option>
           <option value="prostate">Prostate cancer</option>
           <option value="lung" selected>Lung cancer</option>
+        </select>
+        <select id="eth">
+          <option value="maori" selected>Māori</option>
+          <option value="non-maori">Non-māori</option>
         </select>
       </div>
       <div id="imd"></div>
@@ -104,21 +108,26 @@
     const RATE_PER = 1E5;
     var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
 
-    $("#per").change(function (e) {
+    $("#per, #cancertype, #eth").change(function (e) {
       updatePlots(c, s, age_summary, "NZ")
-      createPCP($("#cancertype").val());
+      createPCP($("#cancertype").val(), $("#eth").val());
     });
 
-    function createPCP(ct) {
-      console.log(ct);
+    function createPCP(ct, eth) {
+      console.log(ct, eth);
       var dimensions = []
-      var pcpColumns = {
-        'Māori 2010-2012': "maori2010-2012",
-        'Māori 2013-2015': "maori2013-2015",
-        'Māori 2016-2018': "maori2016-2018",
-        'Non-māori 2010-2012': "non-maori2010-2012",
-        'Non-māori 2013-2015': "non-maori2013-2015",
-        'Non-māori 2016-2018': "non-maori2016-2018",
+      if (eth == "maori") {
+        var pcpColumns = {
+          'Māori 2010-2012': "maori2010-2012",
+          'Māori 2013-2015': "maori2013-2015",
+          'Māori 2016-2018': "maori2016-2018",
+        }  
+      } else {
+        var pcpColumns = {
+          'Non-māori 2010-2012': "non-maori2010-2012",
+          'Non-māori 2013-2015': "non-maori2013-2015",
+          'Non-māori 2016-2018': "non-maori2016-2018",
+        }
       }
       for (var k in pcpColumns) {
         if ($("#per").is(":checked")) {
@@ -157,10 +166,6 @@
 
       Plotly.newPlot('pcp', pcpPlotData, layout, { responsive: true });
     }
-
-    $("#cancertype").change(function(e) {
-      createPCP(this.value);
-    })
 
     function updatePlots(c, s, age_summary, region) {
       var c = { ...c };
