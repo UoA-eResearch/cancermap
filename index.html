@@ -15,6 +15,7 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.3/chroma.min.js"></script>
+  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
   <link rel="stylesheet" href="style.css" />
 
 </head>
@@ -33,6 +34,7 @@
         <div id="smoking" style="width:50%"></div>
       </div>
       <div id="age"></div>
+      <div id="IMD"></div>
       <div id="pcp"></div>
       <div style="text-align: center;">
         <label for="cancertype">Parallel coordinate plot options:</label>
@@ -96,7 +98,12 @@
       opacity: .8,
     });
 
+    var cancerLayer = L.layerGroup().addTo(map);
+    var imdLayer = L.layerGroup()//.addTo(map);
+
     var overlayMaps = {
+      "Cancer": cancerLayer,
+      "NZIMD 2018": imdLayer,
       "City labels": labels,
       "City labels (white)": whitelabels,
     }
@@ -107,10 +114,24 @@
     const MAX_DOMAIN = 3;
     const RATE_PER = 1E5;
     var cmap = chroma.scale("BuGn").domain([MIN_DOMAIN, MAX_DOMAIN]);
+    var NZIMD_cmap = chroma.scale("BuPu").domain([1, 6181])
 
     $("#per, #cancertype, #eth").change(function (e) {
-      updatePlots(c, s, age_summary, "NZ")
+      updatePlots(c, s, age_summary, imd_summary, "NZ")
       createPCP($("#cancertype").val(), $("#eth").val());
+    });
+
+    window.selected_layer = null;
+    map.on("click", function (event) {
+        console.log(event);
+        if (window.selected_layer) {
+            window.selected_layer.setStyle({
+                color: "black",
+                weight: .5
+            });
+            window.selected_layer = null;
+            updatePlots(c, s, age_summary, imd_summary, "NZ")
+        }
     });
 
     function createPCP(ct, eth) {
@@ -167,7 +188,8 @@
       Plotly.newPlot('pcp', pcpPlotData, layout, { responsive: true });
     }
 
-    function updatePlots(c, s, age_summary, region) {
+    function updatePlots(c, s, age_summary, imd_summary, region) {
+      if (window.selected_layer && window.selected_layer.feature.properties.TALB2018_1 != region) return;
       var c = { ...c };
       var s = { ...s };
       var imdY = [
@@ -234,6 +256,16 @@
           title: "Age distribution in " + region + " as per the 2018 census",
         }
       );
+      Plotly.update("IMD",
+          {
+              y: [
+                  Object.keys(window.imd_summary).map(k => imd_summary[k])
+              ],
+          },
+          {
+              title: "Deprivation in " + region,
+          }
+      );
       var pcpDataUpdate = {
         line: {
           color: Object.keys(geojson.features),
@@ -283,7 +315,7 @@
           //console.log(feature, cancer);
           return {
             fillColor: cmap(cancer),
-            fillOpacity: .7,
+            fillOpacity: .5,
             color: "black",
             //dashArray: "2,2",
             weight: .5
@@ -292,15 +324,33 @@
         onEachFeature: function (feature, layer) {
           layer.bindTooltip(feature.properties.TALB2018_1 + " " + feature.cancer.toLocaleString() + "%")
           layer.on('mouseover', function (event) {
-            updatePlots(feature.properties.cancer, feature.properties.smoking, feature.properties.age, feature.properties.TALB2018_1)
+            updatePlots(feature.properties.cancer, feature.properties.smoking, feature.properties.age, feature.properties, feature.properties.TALB2018_1)
           }).on("mouseout", function () {
-            updatePlots(window.c, window.s, window.age_summary, "NZ")
+            updatePlots(window.c, window.s, window.age_summary, imd_summary, "NZ")
+          }).on("click", function (event) {
+              if (window.selected_layer) {
+                  window.selected_layer.setStyle({
+                      color: "black",
+                      weight: .5
+                  });
+              }
+              if (window.selected_layer != event.target) {
+                  window.selected_layer = event.target;
+                  event.target.setStyle({
+                      color: "orange",
+                      weight: 4
+                  })
+                  updatePlots(feature.properties.cancer, feature.properties.smoking, feature.properties.age, feature.properties, feature.properties.TALB2018_1)
+              } else {
+                  window.selected_layer = null;
+              }
+              L.DomEvent.stopPropagation(event);
           });
         },
         filter: function (feature, layer) {
           return feature.properties.cancer;
         },
-      }).addTo(map);
+      }).addTo(cancerLayer);
       window.c = {}
       window.s = {}
       window.age_summary = {
@@ -308,6 +358,18 @@
         "Non-maori": {}
       }
       window.ageKeys = ["0-4 years", "5-9 years", "10-14 years", "15-19 years", "20-24 years", "25-29 years", "30-34 years", "35-39 years", "40-44 years", "45-49 years", "50-54 years", "55-59 years", "60-64 years", "65-69 years", "70-74 years", "75-79 years", "80-84 years", "85 years and over"];
+
+      window.imd_summary = {
+          //"IMD18_count": 0,
+          "IMD18_mean": 0,
+          "Access_mean": 0,
+          "Crime_mean": 0,
+          "Education_mean": 0,
+          "Employment_mean": 0,
+          "Health_mean": 0,
+          "Housing_mean": 0,
+          "Income_mean": 0
+      }
       for (var f of geojson.features) {
         for (var k in f.properties.cancer) {
           if (!c[k]) c[k] = 0;
@@ -324,6 +386,9 @@
           if (!age_summary["Non-maori"][k]) age_summary["Non-maori"][k] = 0;
           if (f.properties.age.Maori[k]) age_summary.Maori[k] += f.properties.age.Maori[k];
           if (f.properties.age["Non-maori"][k]) age_summary["Non-maori"][k] += f.properties.age["Non-maori"][k];
+        }
+        for (var k in imd_summary) {
+          imd_summary[k] += f.properties[k];
         }
       }
       console.log(c, s, age_summary)
@@ -392,6 +457,23 @@
         height: 300,
       }
       Plotly.newPlot("age", agePlotData, layout, { responsive: true });
+
+      console.log(imd_summary)
+      for (var k in imd_summary) {
+        imd_summary[k] /= 6181
+      }
+
+      var imdPlotData = [{
+          x: Object.keys(imd_summary).map(e => e.replace("_mean", "")),
+          y: Object.values(imd_summary),
+          type: 'line',
+      }];
+      layout = {
+          title: "Deprivation in NZ",
+          height: 300,
+      }
+      Plotly.newPlot("IMD", imdPlotData, layout, { responsive: true });
+
       createPCP("lung");
 
       var depPlotData = [
@@ -443,6 +525,20 @@
       Plotly.newPlot("imd", depPlotData, layout, { responsive: true });
     });
 
+    var customLayer = L.geoJson(null, {
+      interactive: false,
+      style: function(feature) {
+        return {
+          fillColor: NZIMD_cmap(feature.properties.IMD18),
+          fillOpacity: .5,
+          color: "black",
+          //dashArray: "2,2",
+          weight: .5
+        }
+      }
+    });
+    omnivore.topojson('data/IMD18.topojson', null, customLayer).addTo(imdLayer);
+
     var legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function (map) {
@@ -454,7 +550,14 @@
         if (i == MAX_DOMAIN) i_text = ">=" + i
         cancerLegend += '<i style="background:' + cmap(i) + '"></i> ' + i_text + '<br>';
       }
-      div.innerHTML += cancerLegend + "</div><div>Hover over an area to show plots for that area</div>";
+      div.innerHTML += cancerLegend + "</div>"
+
+      var imdLegend = "<div id='imdLegend'><h4>NZIMD 2018</h4>";
+      for (var i of [1, 1237, 2473, 3709, 4945, 6181]) {
+        imdLegend += `<i style="background: ${NZIMD_cmap(i)}"></i>${i}<br>`;
+      }
+      div.innerHTML += imdLegend + "</div>"
+      div.innerHTML += "<div>Hover over an area to show plots for that area</div>";
       return div;
     };
 

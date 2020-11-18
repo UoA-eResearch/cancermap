@@ -207,3 +207,7 @@ table thead th {
 #controls {
   text-align: center
 }
+
+.leaflet-overlay-pane {
+  mix-blend-mode: multiply;
+}
